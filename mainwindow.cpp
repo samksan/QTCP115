@@ -63,8 +63,13 @@ void MainWindow::on_actionView_triggered()
     QTableView *table = new QTableView;
     table->setModel(model);
     table->setGeometry(200,160,600,500);
+    table->setColumnWidth(0,250);
+    table->setColumnWidth(1,130);
+    table->setColumnWidth(2,130);
+    table->setColumnWidth(3,130);
+    table->setColumnWidth(4,130);
+    table->setColumnWidth(5,130);
 
-    table->horizontalHeader()->adjustSize();
     table->show();
 }
 
