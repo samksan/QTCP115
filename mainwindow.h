@@ -16,11 +16,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionKaijianghaoma_triggered();
-
-    void on_actionView_triggered();
-
     void on_btnAnalysis_clicked();
+
+    void on_btn_update_number_clicked();
+
+    void on_btn_view_number_clicked();
 
 private:
     Ui::MainWindow *ui;

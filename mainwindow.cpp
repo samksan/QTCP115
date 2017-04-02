@@ -29,14 +29,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// 从网络获取开奖号码，并保存到数据库
-void MainWindow::on_actionKaijianghaoma_triggered()
-{
-    NetNumbers::getHtml("http://ln11x5.icaile.com/?op=dcjb&num=100");
-}
-
 // 连接数据库获取号码并利用 Qt 的 Model-View 显示开奖号码
-void MainWindow::on_actionView_triggered()
+void MainWindow::on_btn_view_number_clicked()
 {
     // 获取数据库连接，测试连接是否成功
     QSqlDatabase db = QSqlDatabase::database();
@@ -62,13 +56,14 @@ void MainWindow::on_actionView_triggered()
 
     QTableView *table = new QTableView;
     table->setModel(model);
-    table->setGeometry(200,160,600,500);
+    table->setGeometry(160,160,1080,500);
     table->setColumnWidth(0,250);
     table->setColumnWidth(1,130);
     table->setColumnWidth(2,130);
     table->setColumnWidth(3,130);
     table->setColumnWidth(4,130);
     table->setColumnWidth(5,130);
+    table->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
     table->show();
 }
@@ -79,4 +74,23 @@ void MainWindow::on_btnAnalysis_clicked()
     // 控制分析过程
     AnalysisControl ana;
     ana.start();
+}
+
+// 从网络获取开奖号码，并保存到数据库
+void MainWindow::on_btn_update_number_clicked()
+{
+    NetNumbers::getHtml("http://ln11x5.icaile.com/?op=dcjb&num=100");
+    QMessageBox::information(NULL,tr("号码更新提示"),tr("号码更新成功"),QMessageBox::Ok);
+
+    // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5, n6}
+    QVector<QVector<int>> numbers_total = NetNumbers::getNumbers();
+
+    // 判断数据库数据是否为 100 期
+    //    int numbers_length = numbers_total.length();
+    if (numbers_total.length() != 100) {
+        qDebug() << "期数总数错误";
+        QMessageBox::critical(NULL,
+                              tr("错误信息"),
+                              tr("号码的期数不正确,可能是数据库数据错误"));
+    }
 }
