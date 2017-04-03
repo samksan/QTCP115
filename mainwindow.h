@@ -22,6 +22,8 @@ private slots:
 
     void on_btn_view_number_clicked();
 
+    void on_btn_view_number_desc_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
