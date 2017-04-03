@@ -55,12 +55,12 @@ void MainWindow::on_btn_view_number_clicked()
     model->setHeaderData(5, Qt::Horizontal, tr("五"));
 
     ui->tableView_number->setModel(model);
-    ui->tableView_number->setColumnWidth(0,250);
-    ui->tableView_number->setColumnWidth(1,130);
-    ui->tableView_number->setColumnWidth(2,130);
-    ui->tableView_number->setColumnWidth(3,130);
-    ui->tableView_number->setColumnWidth(4,130);
-    ui->tableView_number->setColumnWidth(5,130);
+    ui->tableView_number->setColumnWidth(0,290);
+    ui->tableView_number->setColumnWidth(1,100);
+    ui->tableView_number->setColumnWidth(2,100);
+    ui->tableView_number->setColumnWidth(3,100);
+    ui->tableView_number->setColumnWidth(4,100);
+    ui->tableView_number->setColumnWidth(5,100);
 
 
 //    QTableView *table = new QTableView;
@@ -132,10 +132,10 @@ void MainWindow::on_btn_view_number_desc_clicked()
 
 
     ui->tableView_number->setModel(model);
-    ui->tableView_number->setColumnWidth(0,250);
-    ui->tableView_number->setColumnWidth(1,130);
-    ui->tableView_number->setColumnWidth(2,130);
-    ui->tableView_number->setColumnWidth(3,130);
-    ui->tableView_number->setColumnWidth(4,130);
-    ui->tableView_number->setColumnWidth(5,130);
+    ui->tableView_number->setColumnWidth(0,290);
+    ui->tableView_number->setColumnWidth(1,100);
+    ui->tableView_number->setColumnWidth(2,100);
+    ui->tableView_number->setColumnWidth(3,100);
+    ui->tableView_number->setColumnWidth(4,100);
+    ui->tableView_number->setColumnWidth(5,100);
 }
