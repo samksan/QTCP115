@@ -61,20 +61,6 @@ void MainWindow::on_btn_view_number_clicked()
     ui->tableView_number->setColumnWidth(3,100);
     ui->tableView_number->setColumnWidth(4,100);
     ui->tableView_number->setColumnWidth(5,100);
-
-
-//    QTableView *table = new QTableView;
-//    table->setModel(model);
-//    table->setGeometry(160,160,1080,500);
-//    table->setColumnWidth(0,250);
-//    table->setColumnWidth(1,130);
-//    table->setColumnWidth(2,130);
-//    table->setColumnWidth(3,130);
-//    table->setColumnWidth(4,130);
-//    table->setColumnWidth(5,130);
-//    table->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
-
-//    table->show();
 }
 
 // 分析历史号码
@@ -130,7 +116,6 @@ void MainWindow::on_btn_view_number_desc_clicked()
     model->setHeaderData(4, Qt::Horizontal, tr("四"));
     model->setHeaderData(5, Qt::Horizontal, tr("五"));
 
-
     ui->tableView_number->setModel(model);
     ui->tableView_number->setColumnWidth(0,290);
     ui->tableView_number->setColumnWidth(1,100);
@@ -138,4 +123,24 @@ void MainWindow::on_btn_view_number_desc_clicked()
     ui->tableView_number->setColumnWidth(3,100);
     ui->tableView_number->setColumnWidth(4,100);
     ui->tableView_number->setColumnWidth(5,100);
+}
+
+void MainWindow::on_slider_base_valueChanged(int value)
+{
+    ui->comboBox_base->setCurrentText(QString::number(value));
+}
+
+void MainWindow::on_slider_ana_valueChanged(int value)
+{
+    ui->comboBox_ana->setCurrentText(QString::number(value));
+}
+
+void MainWindow::on_comboBox_base_currentTextChanged(const QString &arg1)
+{
+    ui->slider_base->setValue(arg1.toInt());
+}
+
+void MainWindow::on_comboBox_ana_currentTextChanged(const QString &arg1)
+{
+    ui->slider_ana->setValue(arg1.toInt());
 }
