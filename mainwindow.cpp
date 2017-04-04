@@ -6,6 +6,7 @@
 #include <QSqlTableModel>
 #include <QSqlRecord>
 #include <QTableView>
+#include <QSqlQuery>
 
 #include <QFileDialog>
 #include <QTextStream>
@@ -82,7 +83,7 @@ void MainWindow::on_btn_update_number_clicked()
 
     // 判断数据库数据是否为 100 期
     //    int numbers_length = numbers_total.length();
-    if (numbers_total.length() != 100) {
+    if (numbers_total.length() < 100) {
         qDebug() << "期数总数错误";
         QMessageBox::critical(NULL,
                               tr("错误信息"),
@@ -143,4 +144,56 @@ void MainWindow::on_comboBox_base_currentTextChanged(const QString &arg1)
 void MainWindow::on_comboBox_ana_currentTextChanged(const QString &arg1)
 {
     ui->slider_ana->setValue(arg1.toInt());
+}
+
+void MainWindow::on_slider_chart_valueChanged(int value)
+{
+    ui->comboBox_chart->setCurrentText(QString::number(value));
+}
+
+void MainWindow::on_comboBox_chart_currentTextChanged(const QString &arg1)
+{
+    ui->slider_chart->setValue(arg1.toInt());
+}
+
+/**
+ * @brief MainWindow::on_btn_update_manual_clicked 手动添加开奖号码
+ */
+void MainWindow::on_btn_update_manual_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.close();
+    db.open();
+    int n1 = ui->comboBox_n1->currentText().toInt();
+    int n2 = ui->comboBox_n2->currentText().toInt();
+    int n3 = ui->comboBox_n3->currentText().toInt();
+    int n4 = ui->comboBox_n4->currentText().toInt();
+    int n5 = ui->comboBox_n5->currentText().toInt();
+
+    if(n1 == n2 || n1 ==n3 || n1 == n4 || n1 == n5 || n2 == n3 || n2==n4 || n2 == n5 || n3 == n4 || n3 == n5 || n4 == n5){
+        QMessageBox::warning(NULL,
+                             tr("数据输入错误警告"),
+                             tr("一组数据里不能包含相同的数字"),
+                             QMessageBox::Ok,QMessageBox::Close);
+        return;
+    }
+
+    QSqlQuery query;
+    query.exec("SELECT sn FROM KJH");
+    query.last();
+    int sn = query.value(0).toInt();
+    sn++;
+    qDebug() << query.value(0);
+    query.prepare("INSERT INTO kjh VALUES(?,?,?,?,?,?)");
+    query.addBindValue(sn);
+    query.addBindValue(n1);
+    query.addBindValue(n2);
+    query.addBindValue(n3);
+    query.addBindValue(n4);
+    query.addBindValue(n5);
+    query.exec();
+    QMessageBox::information(NULL,
+                         tr("手动更新成功"),
+                         tr("手动更新的号码已经成功写入数据库"),
+                         QMessageBox::Ok);
 }

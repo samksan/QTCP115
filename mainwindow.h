@@ -32,6 +32,12 @@ private slots:
 
     void on_comboBox_ana_currentTextChanged(const QString &arg1);
 
+    void on_slider_chart_valueChanged(int value);
+
+    void on_comboBox_chart_currentTextChanged(const QString &arg1);
+
+    void on_btn_update_manual_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
