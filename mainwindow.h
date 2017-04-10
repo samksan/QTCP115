@@ -16,8 +16,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_btnAnalysis_clicked();
-
     void on_btn_update_number_clicked();
 
     void on_btn_view_number_clicked();
@@ -37,6 +35,8 @@ private slots:
     void on_comboBox_chart_currentTextChanged(const QString &arg1);
 
     void on_btn_update_manual_clicked();
+
+    void on_btn_test_analysis_clicked();
 
 private:
     Ui::MainWindow *ui;

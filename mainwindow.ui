@@ -156,7 +156,7 @@
              </size>
             </property>
             <property name="currentText">
-             <string>2</string>
+             <string>1</string>
             </property>
             <item>
              <property name="text">
@@ -230,7 +230,7 @@
              </size>
             </property>
             <property name="currentText">
-             <string>3</string>
+             <string>1</string>
             </property>
             <item>
              <property name="text">
@@ -304,7 +304,7 @@
              </size>
             </property>
             <property name="currentText">
-             <string>4</string>
+             <string>1</string>
             </property>
             <item>
              <property name="text">
@@ -378,7 +378,7 @@
              </size>
             </property>
             <property name="currentText">
-             <string>5</string>
+             <string>1</string>
             </property>
             <item>
              <property name="text">
@@ -499,7 +499,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>10</string>
+             <string>50</string>
             </property>
             <item>
              <property name="text">
@@ -947,7 +947,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>10</string>
+             <string>30</string>
             </property>
             <item>
              <property name="text">
@@ -1364,8 +1364,11 @@
             <property name="maximum">
              <number>90</number>
             </property>
+            <property name="value">
+             <number>30</number>
+            </property>
             <property name="sliderPosition">
-             <number>50</number>
+             <number>30</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1395,7 +1398,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>3</string>
+             <string>10</string>
             </property>
             <item>
              <property name="text">

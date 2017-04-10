@@ -65,11 +65,16 @@ void MainWindow::on_btn_view_number_clicked()
 }
 
 // 分析历史号码
-void MainWindow::on_btnAnalysis_clicked()
+void MainWindow::on_btn_test_analysis_clicked()
 {
+    // 参数
+    int num_base = ui->comboBox_base->currentText().toInt();
+    int num_ana = ui->comboBox_ana->currentText().toInt();
+    int num_chart = ui->comboBox_chart->currentText().toInt();
+
     // 控制分析过程
     AnalysisControl ana;
-    ana.start();
+    ana.start(num_base, num_ana, num_chart);
 }
 
 // 从网络获取开奖号码，并保存到数据库
@@ -81,8 +86,7 @@ void MainWindow::on_btn_update_number_clicked()
     // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5, n6}
     QVector<QVector<int>> numbers_total = NetNumbers::getNumbers();
 
-    // 判断数据库数据是否为 100 期
-    //    int numbers_length = numbers_total.length();
+    // 判断数据库数据是否小于 100 期
     if (numbers_total.length() < 100) {
         qDebug() << "期数总数错误";
         QMessageBox::critical(NULL,

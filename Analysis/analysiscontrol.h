@@ -14,7 +14,7 @@ public:
     explicit AnalysisControl(QObject *parent = 0);
 
     // 控制号码分析流程
-    void start();
+    void start(const int num_base, const int num_ana, const int num_chart);
 
 signals:
 
