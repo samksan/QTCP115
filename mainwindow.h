@@ -38,6 +38,8 @@ private slots:
 
     void on_btn_test_analysis_clicked();
 
+    void on_btn_data_refresh_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

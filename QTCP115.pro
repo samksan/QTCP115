@@ -18,12 +18,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     database/netnumbers.cpp \
     Analysis/analysiscontrol.cpp \
-    Analysis/analysisutils.cpp
+    Analysis/analysisutils.cpp \
+    database/dataall.cpp
 
 HEADERS  += mainwindow.h \
     database/netnumbers.h \
     Analysis/analysiscontrol.h \
-    Analysis/analysisutils.h
+    Analysis/analysisutils.h \
+    database/dataall.h
 
 FORMS    += mainwindow.ui
 

@@ -14,6 +14,7 @@
 
 #include "Analysis/analysiscontrol.h"
 #include "Analysis/analysisutils.h"
+#include "database/dataall.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 初始化数据库连接
     NetNumbers::initQSQLDatabase();
+
+    // 刷新数据
+    DataAll::numbers_all = NetNumbers::getNumbers();
 }
 
 MainWindow::~MainWindow()
@@ -200,4 +204,33 @@ void MainWindow::on_btn_update_manual_clicked()
                          tr("手动更新成功"),
                          tr("手动更新的号码已经成功写入数据库"),
                          QMessageBox::Ok);
+}
+
+/**
+ * @brief MainWindow::on_btn_data_refresh_clicked 刷新使用的数据
+ */
+void MainWindow::on_btn_data_refresh_clicked()
+{
+    DataAll::numbers_all = NetNumbers::getNumbers();
+    qDebug() << "刷新数据完成";
+    qDebug() << "检查参数";
+    int num_total = DataAll::numbers_all.length();
+    int num_base = ui->comboBox_base->currentText().toInt();
+    int num_ana = ui->comboBox_ana->currentText().toInt();
+    int num_chart = ui->comboBox_chart->currentText().toInt();
+    qDebug() << "总期数 = " << QString::number(num_total);
+
+    if (num_total < num_base + num_ana + 1
+            || num_ana <= num_chart) {
+        QString temp;
+        temp.append("总期数: " + QString::number(num_total) + "\n");
+        temp.append("基础期数: " + QString::number(num_base) + "\n");
+        temp.append("分析期数: " + QString::number(num_ana) + "\n");
+        temp.append("图表期数: " + QString::number(num_chart) + "\n");
+        temp.append("一: 基础期数和分析期数的和不能大于总期数-1\n");
+        temp.append("二: 图表期数不能大于或等于分析期数\n");
+
+        QMessageBox::warning(NULL, tr("错误警告"), temp, QMessageBox::Ok,QMessageBox::Close);
+    }
+
 }

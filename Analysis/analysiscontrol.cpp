@@ -2,6 +2,7 @@
 #include "analysisutils.h"
 #include "database/netnumbers.h"
 #include <QMessageBox>
+#include "database/dataall.h"
 
 AnalysisControl::AnalysisControl(QObject *parent) : QObject(parent)
 {
@@ -16,16 +17,11 @@ AnalysisControl::AnalysisControl(QObject *parent) : QObject(parent)
  */
 void AnalysisControl::start(const int num_base, const int num_ana, const int num_chart)
 {
-    // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5}
-    QVector<QVector<int>> numbers_total = NetNumbers::getNumbers();
-
     // 第一步: 循环计算得出跟随表
-    for (int loop = numbers_total.length() - num_ana; loop < numbers_total.length(); ++loop) {
-        //
-        qDebug() << loop;
-
-
-
-    }
+    qDebug() << "lskjflksdj";
+    qDebug() << DataAll::numbers_all[0][0];
+    AnalysisUtils::s1_follow(DataAll::numbers_all, num_base, num_ana);
+    qDebug() << "affffflskjflksdj";
+    qDebug() << DataAll::numbers_all[0][0];
 
 }
