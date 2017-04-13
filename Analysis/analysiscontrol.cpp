@@ -20,4 +20,8 @@ void AnalysisControl::start(const int num_base, const int num_ana, const int num
     // 第一步: 循环计算得出跟随表
     AnalysisUtils::s1_follow(DataAll::numbers_all, num_base, num_ana);
 
+    // 第二步: 根据跟随表和开奖号码计算得到 主动 被动 代码
+    AnalysisUtils::s2_zdbd(DataAll::numbers_all, num_ana);
+
+
 }

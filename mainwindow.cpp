@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 刷新数据
     DataAll::numbers_all = NetNumbers::getNumbers();
+
+    // 初始化转化字典
+    DataAll::InitMap();
 }
 
 MainWindow::~MainWindow()

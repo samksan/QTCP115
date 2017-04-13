@@ -1,6 +1,7 @@
 #include "analysisutils.h"
 #include <QVector>
 #include <QDebug>
+#include "database/dataall.h"
 
 AnalysisUtils::AnalysisUtils(QObject *parent) : QObject(parent)
 {
@@ -74,6 +75,68 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
 }
 
 /**
+ * @brief AnalysisUtils::s2_zdbd 第二步: 根据开奖号码计算得到 zdbd 主动和别动,添加到开奖号码后面
+ * @param num_total 所有分析数据的集合
+ * @param num_ana 分析的期数
+ */
+void AnalysisUtils::s2_zdbd(QVector<QVector<int> > &num_total, const int num_ana)
+{
+    // 跟随表分区
+    // num_total 目前的格式:
+    // num_ana之前(原始数据): sn(期号),n1(号1),n2(号2),n3(号3),n4(号4),n5(号5)
+    // num_ana之后(跟随表   ): 多出了55个数字, desc11(11个号码的出现次数降序排序) * 5 = 55 个数字
+
+    // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
+    for (int num_now = num_total.length() - num_ana; num_now < num_total.length() - 1; ++num_now) {
+        // 分析的号码
+        int num_now1 = num_total[num_now][1];
+        int num_now2 = num_total[num_now][2];
+        int num_now3 = num_total[num_now][3];
+        int num_now4 = num_total[num_now][4];
+        int num_now5 = num_total[num_now][5];
+
+        // 分析的号码的下一期号码
+        int num_next1 = num_total[num_now + 1][1];
+        int num_next2 = num_total[num_now + 1][2];
+        int num_next3 = num_total[num_now + 1][3];
+        int num_next4 = num_total[num_now + 1][4];
+        int num_next5 = num_total[num_now + 1][5];
+
+        // zd abcde
+        QVector<int> desc_a = num_total[num_now].mid(6,11);
+        QVector<int> desc_b = num_total[num_now].mid(17,11);
+        QVector<int> desc_c = num_total[num_now].mid(28,11);
+        QVector<int> desc_d = num_total[num_now].mid(39,11);
+        QVector<int> desc_e = num_total[num_now].mid(50,11);
+
+        // 主动计算
+        int trans_int = ZD_ANA(desc_a, num_next1, num_next2, num_next3, num_next4, num_next1);
+        num_total[num_now] << trans_int;
+        trans_int = ZD_ANA(desc_b, num_next1, num_next2, num_next3, num_next4, num_next1);
+        num_total[num_now] << trans_int;
+        trans_int = ZD_ANA(desc_c, num_next1, num_next2, num_next3, num_next4, num_next1);
+        num_total[num_now] << trans_int;
+        trans_int = ZD_ANA(desc_d, num_next1, num_next2, num_next3, num_next4, num_next1);
+        num_total[num_now] << trans_int;
+        trans_int = ZD_ANA(desc_e, num_next1, num_next2, num_next3, num_next4, num_next1);
+        num_total[num_now] << trans_int;
+
+        // 被动计算
+        trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next1);
+        num_total[num_now] << trans_int;
+        trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next2);
+        num_total[num_now] << trans_int;
+        trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next3);
+        num_total[num_now] << trans_int;
+        trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next4);
+        num_total[num_now] << trans_int;
+        trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next5);
+        num_total[num_now] << trans_int;
+
+    }
+}
+
+/**
  * @brief VectorDesc 修改传入的 QVector, 变成 1-11 的出现次数的多少排序DESC
  * @param vector 11个号码的出现次数
  */
@@ -96,6 +159,34 @@ void AnalysisUtils::VectorDesc(QVector<int> &vector)
     }
 
     vector = result;
+}
+
+int AnalysisUtils::ZD_ANA(QVector<int> area, int n1, int n2, int n3, int n4, int n5)
+{
+    // 分3区 4 4 3
+    QVector<int> zd_1 = area.mid(0,4);
+    QVector<int> zd_2 = area.mid(4,4);
+    QVector<int> zd_3 = area.mid(8,3);
+
+    int count_area_1 = zd_1.count(n1) + zd_1.count(n2) + zd_1.count(n3) + zd_1.count(n4) + zd_1.count(n5);
+    int count_area_2 = zd_2.count(n1) + zd_2.count(n2) + zd_2.count(n3) + zd_2.count(n4) + zd_2.count(n5);
+    int count_area_3 = zd_3.count(n1) + zd_3.count(n2) + zd_3.count(n3) + zd_3.count(n4) + zd_3.count(n5);
+
+    int zd = count_area_1 * 100 + count_area_2 * 10 + count_area_3;
+    return DataAll::dic_desc_num[zd];
+}
+
+int AnalysisUtils::BD_ANA(QVector<int> area1, QVector<int> area2, QVector<int> area3, QVector<int> area4, QVector<int> area5, int num)
+{
+    QVector<int> a1;
+    QVector<int> a2;
+    QVector<int> a3;
+    a1 << area1.mid(0,4) << area2.mid(0,4) << area3(0,4) << area4(0,4) << area5(0,4);
+    a2 << area1.mid(4,4) << area2.mid(4,4) << area3(4,4) << area4(4,4) << area5(4,4);
+    a3 << area1.mid(8,3) << area2.mid(8,3) << area3(8,3) << area4(8,3) << area5(8,3);
+
+    int bd = a1.count(num) * 100 + a2.count(num) * 10 + a3.count(num);
+    return DataAll::dic_desc_num[bd];
 }
 
 
