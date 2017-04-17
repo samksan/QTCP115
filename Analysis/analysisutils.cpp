@@ -137,6 +137,41 @@ void AnalysisUtils::s2_zdbd(QVector<QVector<int> > &num_total, const int num_ana
 }
 
 /**
+ * @brief AnalysisUtils::s3_zdbd_ana 第三步: 根据本期号码、开奖号码、主动、被动和 num_chart 计算得出规律(主动单,主动整,被动单,被动整)
+ * @param num_total 所有分析数据的集合
+ * @param num_ana 分析的期数
+ * @param num_chart 显示的图表期数
+ */
+void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num_ana, const int num_chart)
+{
+    // num_total 目前的格式:
+    // 最后的 num_ana 期之前
+    // 原始数据: sn(期号),n1(号1),n2(号2),n3(号3),n4(号4),n5(号5)  pointer(0-5)
+    // 最后的 num_ana 期
+    // 跟随表: 多出了55个数字, desc11(11个号码的出现次数降序排序) * 5 = 55 个数字   point(6-60)
+    // 主动表: 多出了5个数字 pointer(61-65)
+    // 被动表: 多出了5个数字 pointer(66-70)
+
+    // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
+    QVector<int> collection_zdbd;
+    for (int num_now = num_total.length() - num_chart; num_now < num_total.length() - 1; ++num_now) {
+        collection_zdbd.clear();
+        // 主动单
+        int num1 = num_total[num_now][1];
+        for (int loop_ana = num_total.length() - num_ana; loop_ana < num_now; ++loop_ana) {
+            if (num_total[loop_ana].mid(1,5).contains(num1)) {
+                collection_zdbd << num_total[loop_ana + 1].mid(61, 5);
+                qDebug() << collection_zdbd;
+            }
+        }
+
+
+
+
+    }
+}
+
+/**
  * @brief VectorDesc 修改传入的 QVector, 变成 1-11 的出现次数的多少排序DESC
  * @param vector 11个号码的出现次数
  */
@@ -181,9 +216,9 @@ int AnalysisUtils::BD_ANA(QVector<int> area1, QVector<int> area2, QVector<int> a
     QVector<int> a1;
     QVector<int> a2;
     QVector<int> a3;
-    a1 << area1.mid(0,4) << area2.mid(0,4) << area3(0,4) << area4(0,4) << area5(0,4);
-    a2 << area1.mid(4,4) << area2.mid(4,4) << area3(4,4) << area4(4,4) << area5(4,4);
-    a3 << area1.mid(8,3) << area2.mid(8,3) << area3(8,3) << area4(8,3) << area5(8,3);
+    a1 << area1.mid(0,4) << area2.mid(0,4) << area3.mid(0,4) << area4.mid(0,4) << area5.mid(0,4);
+    a2 << area1.mid(4,4) << area2.mid(4,4) << area3.mid(4,4) << area4.mid(4,4) << area5.mid(4,4);
+    a3 << area1.mid(8,3) << area2.mid(8,3) << area3.mid(8,3) << area4.mid(8,3) << area5.mid(8,3);
 
     int bd = a1.count(num) * 100 + a2.count(num) * 10 + a3.count(num);
     return DataAll::dic_desc_num[bd];
