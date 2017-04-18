@@ -89,12 +89,6 @@ void AnalysisUtils::s2_zdbd(QVector<QVector<int> > &num_total, const int num_ana
 
     // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
     for (int num_now = num_total.length() - num_ana; num_now < num_total.length() - 1; ++num_now) {
-        // 分析的号码
-        int num_now1 = num_total[num_now][1];
-        int num_now2 = num_total[num_now][2];
-        int num_now3 = num_total[num_now][3];
-        int num_now4 = num_total[num_now][4];
-        int num_now5 = num_total[num_now][5];
 
         // 分析的号码的下一期号码
         int num_next1 = num_total[num_now + 1][1];
@@ -188,13 +182,10 @@ void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
             int num = num_total[num_now + 1][loop5];
-            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now; ++loop_ana) {
-                if (num_total[loop_ana].mid(1,5).contains(num)) {
-                    temp[num_total[loop_ana - 1][66] - 1] += 1;
-                    temp[num_total[loop_ana - 1][67] - 1] += 1;
-                    temp[num_total[loop_ana - 1][68] - 1] += 1;
-                    temp[num_total[loop_ana - 1][69] - 1] += 1;
-                    temp[num_total[loop_ana - 1][70] - 1] += 1;
+            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now - 1; ++loop_ana) {
+                if (num_total[loop_ana].mid(1, 5).contains(num)) {
+                    int position = num_total[loop_ana].mid(1, 5).indexOf(num);
+                    temp[num_total[loop_ana - 1][66 + position] - 1] += 1;
                     qDebug() << collection_zdbd;
                 }
             }
