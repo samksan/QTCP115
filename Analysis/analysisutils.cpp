@@ -69,6 +69,7 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
             for (int loops = 0; loops < vector_temp.length(); ++loops) {
                 num_total[num_now] << vector_temp[loops];
             }
+//            num_total[num_now] << vector_temp;
 
         }
     }
@@ -154,19 +155,56 @@ void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num
 
     // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
     QVector<int> collection_zdbd;
+
+    // 临时存储个数的 QVector 1-21
+    QVector<int> temp(21);
     for (int num_now = num_total.length() - num_chart; num_now < num_total.length() - 1; ++num_now) {
         collection_zdbd.clear();
+        temp.fill(0);
         // 主动单
-        int num1 = num_total[num_now][1];
-        for (int loop_ana = num_total.length() - num_ana; loop_ana < num_now; ++loop_ana) {
-            if (num_total[loop_ana].mid(1,5).contains(num1)) {
-                collection_zdbd << num_total[loop_ana + 1].mid(61, 5);
-                qDebug() << collection_zdbd;
+
+        // 循环 1-5 个号码
+        for (int loop5 = 1; loop5 <= 5; ++loop5) {
+            int num = num_total[num_now][loop5];
+            for (int loop_ana = num_total.length() - num_ana; loop_ana < num_now; ++loop_ana) {
+                if (num_total[loop_ana].mid(1,5).contains(num)) {
+                    temp[num_total[loop_ana][61] - 1] += 1;
+                    temp[num_total[loop_ana][62] - 1] += 1;
+                    temp[num_total[loop_ana][63] - 1] += 1;
+                    temp[num_total[loop_ana][64] - 1] += 1;
+                    temp[num_total[loop_ana][65] - 1] += 1;
+                    qDebug() << collection_zdbd;
+                }
             }
+
+            // temp 排序
+            VectorDesc(temp);
+            int position = temp.indexOf(num_total[num_now][60 + loop5]) + 1;
+            temp.fill(0);
+            num_total[num_now] << position;
         }
 
+        // 被动单
+        // 循环 1-5 个号码
+        for (int loop5 = 1; loop5 <= 5; ++loop5) {
+            int num = num_total[num_now + 1][loop5];
+            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now; ++loop_ana) {
+                if (num_total[loop_ana].mid(1,5).contains(num)) {
+                    temp[num_total[loop_ana - 1][66] - 1] += 1;
+                    temp[num_total[loop_ana - 1][67] - 1] += 1;
+                    temp[num_total[loop_ana - 1][68] - 1] += 1;
+                    temp[num_total[loop_ana - 1][69] - 1] += 1;
+                    temp[num_total[loop_ana - 1][70] - 1] += 1;
+                    qDebug() << collection_zdbd;
+                }
+            }
 
-
+            // temp 排序
+            VectorDesc(temp);
+            int position = temp.indexOf(num_total[num_now][65 + loop5]) + 1;
+            temp.fill(0);
+            num_total[num_now] << position;
+        }
 
     }
 }
