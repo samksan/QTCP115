@@ -54,5 +54,8 @@ void DataAll::InitMap()
 }
 
 QVector<QVector<int>> DataAll::numbers_all;
+QVector<QVector<int>> DataAll::numbers_ana;
+QVector<QVector<int>> DataAll::numbers_zdbd;
+QVector<QVector<int>> DataAll::numbers_chart;
 QMap<int,int> DataAll::dic_desc_num;
 QMap<int,int> DataAll::dic_num_desc;

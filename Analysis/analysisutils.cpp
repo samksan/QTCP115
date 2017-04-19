@@ -147,15 +147,17 @@ void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num
     // 主动表: 多出了5个数字 pointer(61-65)
     // 被动表: 多出了5个数字 pointer(66-70)
 
-    // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
-    QVector<int> collection_zdbd;
-
     // 临时存储个数的 QVector 1-21
     QVector<int> temp(21);
+
+    // 循环 最后的 num_chart 期数据, 不包含最后的一期
     for (int num_now = num_total.length() - num_chart; num_now < num_total.length() - 1; ++num_now) {
-        collection_zdbd.clear();
+
+        // 清空临时数组
         temp.fill(0);
+
         // 主动单
+        // 目标: 主动单: 多出5个数字 pointer(71-75)
 
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
@@ -167,7 +169,6 @@ void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num
                     temp[num_total[loop_ana][63] - 1] += 1;
                     temp[num_total[loop_ana][64] - 1] += 1;
                     temp[num_total[loop_ana][65] - 1] += 1;
-                    qDebug() << collection_zdbd;
                 }
             }
 
@@ -179,14 +180,14 @@ void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num
         }
 
         // 被动单
+        // 目标: 被动单: 多出5个数字 pointer(76-80)
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
             int num = num_total[num_now + 1][loop5];
-            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now - 1; ++loop_ana) {
+            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now; ++loop_ana) {
                 if (num_total[loop_ana].mid(1, 5).contains(num)) {
                     int position = num_total[loop_ana].mid(1, 5).indexOf(num);
                     temp[num_total[loop_ana - 1][66 + position] - 1] += 1;
-                    qDebug() << collection_zdbd;
                 }
             }
 
