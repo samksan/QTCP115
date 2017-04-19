@@ -23,12 +23,18 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
     // 存放 1-11 的出现次数
     QVector<int> vector_temp(11);
 
+    // 存储一期5个号码的分析结果集合
+    QVector<int> vector_temp_group;
+
     // num_now 正在分析的号码行号
     for (int num_now = num_total.length() - num_ana; num_now < num_total.length(); ++num_now) {
 
+        // 清空临时 vector
+        vector_temp_group.clear();
+        vector_temp_group << num_total[num_now].mid(0, 6);
+
         // 循环5个号码
         for (int var = 1; var <= 5; ++var) {
-
             // num 正在分析的号码
             int num = num_total[num_now].at(var);
 
@@ -66,12 +72,12 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
             VectorDesc(vector_temp);
 
             // 把结果加入到数据集中
-            for (int loops = 0; loops < vector_temp.length(); ++loops) {
-                num_total[num_now] << vector_temp[loops];
-            }
-//            num_total[num_now] << vector_temp;
+            vector_temp_group << vector_temp;
 
         }
+
+        // 保存数据
+        DataAll::numbers_ana << vector_temp_group;
     }
 }
 

@@ -91,10 +91,10 @@ void MainWindow::on_btn_update_number_clicked()
     QMessageBox::information(NULL,tr("号码更新提示"),tr("号码更新成功"),QMessageBox::Ok);
 
     // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5, n6}
-    QVector<QVector<int>> numbers_total = NetNumbers::getNumbers();
+    DataAll::numbers_all = NetNumbers::getNumbers();
 
     // 判断数据库数据是否小于 100 期
-    if (numbers_total.length() < 100) {
+    if (DataAll::numbers_all.length() < 100) {
         qDebug() << "期数总数错误";
         QMessageBox::critical(NULL,
                               tr("错误信息"),
@@ -203,6 +203,9 @@ void MainWindow::on_btn_update_manual_clicked()
     query.addBindValue(n4);
     query.addBindValue(n5);
     query.exec();
+
+    DataAll::numbers_all = NetNumbers::getNumbers();
+
     QMessageBox::information(NULL,
                          tr("手动更新成功"),
                          tr("手动更新的号码已经成功写入数据库"),
