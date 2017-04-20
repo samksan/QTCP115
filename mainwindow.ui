@@ -499,7 +499,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>10</string>
+             <string>50</string>
             </property>
             <item>
              <property name="text">
@@ -947,7 +947,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>10</string>
+             <string>30</string>
             </property>
             <item>
              <property name="text">
@@ -1398,7 +1398,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>3</string>
+             <string>10</string>
             </property>
             <item>
              <property name="text">

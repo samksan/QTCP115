@@ -29,6 +29,8 @@ public:
      */
     static QVector<QVector<int>> numbers_ana;
 
+    static void ana_to_database();
+
     /**
      * @brief numbers_zdbd QVector<QVector<int>> Step2 得出的结果, 不包含最后一期号码
      *  内层 QVector 结构: QVector<int>(21)

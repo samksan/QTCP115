@@ -48,17 +48,7 @@ void NetNumbers::toDB(int number[100][6])
 
     // 格式化数据表，保存开奖号
     QSqlQuery query;
-    query.exec("create table kjh(sn int primarykey,n1 int,n2 int,n3 int,n4 int,n5 int)");
-    query.exec("DELETE FROM kjh");
-
-    query.exec("create table ana(sn int primarykey, n1 int, n2 int, n3 int, n4 int, n5 int,"
-               "d101 int, d102 int, d103 int, d104 int, d105 int, d106 int, d107 int, d108 int, d109 int, d110 int, d111 int"
-               "d201 int, d202 int, d203 int, d204 int, d205 int, d206 int, d207 int, d208 int, d209 int, d210 int, d211 int"
-               "d301 int, d302 int, d303 int, d304 int, d305 int, d306 int, d307 int, d308 int, d309 int, d310 int, d311 int"
-               "d401 int, d402 int, d403 int, d404 int, d405 int, d406 int, d407 int, d408 int, d409 int, d410 int, d411 int"
-               "d501 int, d502 int, d503 int, d504 int, d505 int, d506 int, d507 int, d508 int, d509 int, d510 int, d511 int");
-    query.exec("DELETE FROM ana");
-
+    query.exec("delete from kjh");
     query.prepare("INSERT INTO kjh VALUES(?,?,?,?,?,?)");
     for (int var = 0; var < 100; ++var) {
         query.bindValue(0,number[var][0]);
@@ -92,6 +82,17 @@ void NetNumbers::initQSQLDatabase()
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName("localhost");
     db.setDatabaseName("kjhdb.db");
+    db.open();
+
+    QSqlQuery query;
+    query.exec("create table if not exists kjh(sn int primarykey,n1 int,n2 int,n3 int,n4 int,n5 int)");
+    query.exec("create table if not exists ana(sn int primarykey, n1 int, n2 int, n3 int, n4 int, n5 int,"
+               "d101 int,d102 int,d103 int,d104 int,d105 int,d106 int,d107 int,d108 int,d109 int,d110 int,d111 int,"
+               "d201 int,d202 int,d203 int,d204 int,d205 int,d206 int,d207 int,d208 int,d209 int,d210 int,d211 int,"
+               "d301 int,d302 int,d303 int,d304 int,d305 int,d306 int,d307 int,d308 int,d309 int,d310 int,d311 int,"
+               "d401 int,d402 int,d403 int,d404 int,d405 int,d406 int,d407 int,d408 int,d409 int,d410 int,d411 int,"
+               "d501 int,d502 int,d503 int,d504 int,d505 int,d506 int,d507 int,d508 int,d509 int,d510 int,d511 int)");
+
 }
 
 /**

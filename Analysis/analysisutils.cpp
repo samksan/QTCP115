@@ -82,6 +82,9 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
         // 保存数据
         DataAll::numbers_ana << vector_temp_group;
     }
+
+    // DataAll::numbers_ana 存储到数据库中
+    DataAll::ana_to_database();
 }
 
 /**
@@ -95,7 +98,7 @@ void AnalysisUtils::s2_zdbd()
     QVector<int> vector_temp_group;
 
     // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
-    for (int num_now = 0; num_now < DataAll::numbers_ana - 1; ++num_now) {
+    for (int num_now = 0; num_now < DataAll::numbers_ana.length() - 1; ++num_now) {
 
         // 临时数据清空
         vector_temp_group.clear();
@@ -142,6 +145,8 @@ void AnalysisUtils::s2_zdbd()
         DataAll::numbers_zdbd << vector_temp_group;
 
     }
+
+
 }
 
 /**
