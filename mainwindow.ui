@@ -499,7 +499,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>50</string>
+             <string>10</string>
             </property>
             <item>
              <property name="text">
@@ -947,7 +947,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>30</string>
+             <string>10</string>
             </property>
             <item>
              <property name="text">
@@ -1398,7 +1398,7 @@
              </sizepolicy>
             </property>
             <property name="currentText">
-             <string>10</string>
+             <string>3</string>
             </property>
             <item>
              <property name="text">
@@ -1735,6 +1735,31 @@
             </property>
             <property name="text">
              <string>开始测试参数准确率</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="btn_show_chart">
+            <property name="text">
+             <string>显示ANA</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_show_ana">
+            <property name="text">
+             <string>显示ZDBD</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_show_zdbd">
+            <property name="text">
+             <string>显示chart</string>
             </property>
            </widget>
           </item>

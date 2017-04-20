@@ -20,6 +20,9 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
     // 假设 num_base = 30, num_ana = 10 , 共有 100 期
     // 则循环最后10期, 90-99
 
+    // 清空数据
+    DataAll::numbers_ana.clear();
+
     // 存放 1-11 的出现次数
     QVector<int> vector_temp(11);
 
@@ -83,56 +86,60 @@ void AnalysisUtils::s1_follow(QVector<QVector<int>> &num_total, const int num_ba
 
 /**
  * @brief AnalysisUtils::s2_zdbd 第二步: 根据开奖号码计算得到 zdbd 主动和别动,添加到开奖号码后面
- * @param num_total 所有分析数据的集合
- * @param num_ana 分析的期数
  */
-void AnalysisUtils::s2_zdbd(QVector<QVector<int> > &num_total, const int num_ana)
+void AnalysisUtils::s2_zdbd()
 {
-    // 跟随表分区
-    // num_total 目前的格式:
-    // num_ana之前(原始数据): sn(期号),n1(号1),n2(号2),n3(号3),n4(号4),n5(号5)
-    // num_ana之后(跟随表   ): 多出了55个数字, desc11(11个号码的出现次数降序排序) * 5 = 55 个数字
+    // 清空数据
+    DataAll::numbers_zdbd.clear();
+
+    QVector<int> vector_temp_group;
 
     // 循环分析号码(包含跟随表的数据), 不包含最后一期,因为最后一期没有下一期的结果
-    for (int num_now = num_total.length() - num_ana; num_now < num_total.length() - 1; ++num_now) {
+    for (int num_now = 0; num_now < DataAll::numbers_ana - 1; ++num_now) {
+
+        // 临时数据清空
+        vector_temp_group.clear();
 
         // 分析的号码的下一期号码
-        int num_next1 = num_total[num_now + 1][1];
-        int num_next2 = num_total[num_now + 1][2];
-        int num_next3 = num_total[num_now + 1][3];
-        int num_next4 = num_total[num_now + 1][4];
-        int num_next5 = num_total[num_now + 1][5];
+        int num_next1 = DataAll::numbers_ana[num_now + 1][1];
+        int num_next2 = DataAll::numbers_ana[num_now + 1][2];
+        int num_next3 = DataAll::numbers_ana[num_now + 1][3];
+        int num_next4 = DataAll::numbers_ana[num_now + 1][4];
+        int num_next5 = DataAll::numbers_ana[num_now + 1][5];
 
         // zd abcde
-        QVector<int> desc_a = num_total[num_now].mid(6,11);
-        QVector<int> desc_b = num_total[num_now].mid(17,11);
-        QVector<int> desc_c = num_total[num_now].mid(28,11);
-        QVector<int> desc_d = num_total[num_now].mid(39,11);
-        QVector<int> desc_e = num_total[num_now].mid(50,11);
+        QVector<int> desc_a = DataAll::numbers_ana[num_now].mid(6,11);
+        QVector<int> desc_b = DataAll::numbers_ana[num_now].mid(17,11);
+        QVector<int> desc_c = DataAll::numbers_ana[num_now].mid(28,11);
+        QVector<int> desc_d = DataAll::numbers_ana[num_now].mid(39,11);
+        QVector<int> desc_e = DataAll::numbers_ana[num_now].mid(50,11);
 
         // 主动计算
-        int trans_int = ZD_ANA(desc_a, num_next1, num_next2, num_next3, num_next4, num_next1);
-        num_total[num_now] << trans_int;
-        trans_int = ZD_ANA(desc_b, num_next1, num_next2, num_next3, num_next4, num_next1);
-        num_total[num_now] << trans_int;
-        trans_int = ZD_ANA(desc_c, num_next1, num_next2, num_next3, num_next4, num_next1);
-        num_total[num_now] << trans_int;
-        trans_int = ZD_ANA(desc_d, num_next1, num_next2, num_next3, num_next4, num_next1);
-        num_total[num_now] << trans_int;
-        trans_int = ZD_ANA(desc_e, num_next1, num_next2, num_next3, num_next4, num_next1);
-        num_total[num_now] << trans_int;
+        int trans_int = ZD_ANA(desc_a, num_next1, num_next2, num_next3, num_next4, num_next5);
+        vector_temp_group << trans_int;
+        trans_int = ZD_ANA(desc_b, num_next1, num_next2, num_next3, num_next4, num_next5);
+        vector_temp_group << trans_int;
+        trans_int = ZD_ANA(desc_c, num_next1, num_next2, num_next3, num_next4, num_next5);
+        vector_temp_group << trans_int;
+        trans_int = ZD_ANA(desc_d, num_next1, num_next2, num_next3, num_next4, num_next5);
+        vector_temp_group << trans_int;
+        trans_int = ZD_ANA(desc_e, num_next1, num_next2, num_next3, num_next4, num_next5);
+        vector_temp_group << trans_int;
 
         // 被动计算
         trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next1);
-        num_total[num_now] << trans_int;
+        vector_temp_group << trans_int;
         trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next2);
-        num_total[num_now] << trans_int;
+        vector_temp_group << trans_int;
         trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next3);
-        num_total[num_now] << trans_int;
+        vector_temp_group << trans_int;
         trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next4);
-        num_total[num_now] << trans_int;
+        vector_temp_group << trans_int;
         trans_int = BD_ANA(desc_a, desc_b, desc_c, desc_d, desc_e, num_next5);
-        num_total[num_now] << trans_int;
+        vector_temp_group << trans_int;
+
+        // 保存数据
+        DataAll::numbers_zdbd << vector_temp_group;
 
     }
 }

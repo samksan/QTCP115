@@ -21,13 +21,13 @@ void AnalysisControl::start(const int num_base, const int num_ana, const int num
     AnalysisUtils::s1_follow(DataAll::numbers_all, num_base, num_ana);
 
     // 第二步: 根据跟随表和开奖号码计算得到 主动 被动 代码
-    AnalysisUtils::s2_zdbd(DataAll::numbers_all, num_ana);
+    AnalysisUtils::s2_zdbd();
     qDebug() << "s2 finished";
 
     // 第三步: 根据本期号码、开奖号码、主动、被动和 num_chart 计算得出规律(主动单,主动整,被动单,被动整)
-    AnalysisUtils::s3_zdbd_ana(DataAll::numbers_all, num_ana, num_chart);
+    //AnalysisUtils::s3_zdbd_ana(DataAll::numbers_all, num_ana, num_chart);
 
-    qDebug() << "s3 finished";
+    //qDebug() << "s3 finished";
 
 
 }
