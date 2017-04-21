@@ -92,6 +92,9 @@ void NetNumbers::initQSQLDatabase()
                "d301 int,d302 int,d303 int,d304 int,d305 int,d306 int,d307 int,d308 int,d309 int,d310 int,d311 int,"
                "d401 int,d402 int,d403 int,d404 int,d405 int,d406 int,d407 int,d408 int,d409 int,d410 int,d411 int,"
                "d501 int,d502 int,d503 int,d504 int,d505 int,d506 int,d507 int,d508 int,d509 int,d510 int,d511 int)");
+    query.exec("create table if not exists zdbd(sn int primarykey, "
+               "n1 int, n2 int, n3 int, n4 int, n5 int, nn1 int, nn2 int, nn3 int, nn4 int, nn5 int, "
+               "zd1 int,zd2 int,zd3 int,zd4 int,zd5 int,bd1 int, bd2 int,bd3 int,bd4 int,bd5 int)");
 
 }
 

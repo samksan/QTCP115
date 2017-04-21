@@ -88,6 +88,30 @@ void DataAll::ana_to_database()
     }
 }
 
+void DataAll::zdbd_to_database()
+{
+    // DataAll::numbers_zdbd 写入数据库
+    // 获取数据库连接，测试连接是否成功
+    QSqlDatabase db = QSqlDatabase::database();
+    bool ok = db.open();
+    if(!ok){
+        QMessageBox::information(NULL, "数据库连接失败", "数据库连接失败!!!", QMessageBox::Ok);
+    }
+
+    QSqlQuery query;
+    query.exec("DELETE FROM zdbd");
+    foreach (QVector<int> var, DataAll::numbers_zdbd) {
+        query.prepare("insert into zdbd (sn, n1, n2, n3, n4, n5, nn1, nn2, nn3, nn4, nn5, "
+                      "zd1, zd2, zd3, zd4, zd5, bd1, bd2, bd3, bd4, bd5)"
+                      " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
+                      " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        foreach (int temp, var) {
+            query.addBindValue(temp);
+        }
+        query.exec();
+    }
+}
+
 QVector<QVector<int>> DataAll::numbers_all;
 QVector<QVector<int>> DataAll::numbers_ana;
 QVector<QVector<int>> DataAll::numbers_zdbd;

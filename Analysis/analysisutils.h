@@ -21,7 +21,7 @@ public:
     static void s2_zdbd();
 
     // 第三步: 根据本期号码、开奖号码、主动、被动和 num_chart 计算得出规律(主动单,主动整,被动单,被动整)
-    static void s3_zdbd_ana(QVector<QVector<int>> &num_total, const int num_ana, const int num_chart);
+    static void s3_zdbd_ana(const int num_chart);
 private:
     /**
      * @brief VectorDesc 修改传入的 QVector, 变成 1-11 的出现次数的多少排序DESC

@@ -102,6 +102,8 @@ void AnalysisUtils::s2_zdbd()
 
         // 临时数据清空
         vector_temp_group.clear();
+        vector_temp_group << DataAll::numbers_ana[num_now].mid(0, 6);
+        vector_temp_group << DataAll::numbers_ana[num_now + 1].mid(1, 5);
 
         // 分析的号码的下一期号码
         int num_next1 = DataAll::numbers_ana[num_now + 1][1];
@@ -146,77 +148,89 @@ void AnalysisUtils::s2_zdbd()
 
     }
 
-
+    // DataAll::numbers_zdbd 存储到数据库中
+    DataAll::zdbd_to_database();
 }
 
 /**
  * @brief AnalysisUtils::s3_zdbd_ana 第三步: 根据本期号码、开奖号码、主动、被动和 num_chart 计算得出规律(主动单,主动整,被动单,被动整)
- * @param num_total 所有分析数据的集合
- * @param num_ana 分析的期数
+ *  DataAll::numbers_zdbd 数据结构
+ *  内层 QVector 结构: QVector<int>(21)
+ *  (0, 6) 期号, 第一个号码, 第二个号码, 第三个号码, 第四个号码, 第五个号码
+ *  (6, 5) 下一期的5个号码
+ *  (11, 5) 主动表
+ *  (16, 5) 被动表
  * @param num_chart 显示的图表期数
  */
-void AnalysisUtils::s3_zdbd_ana(QVector<QVector<int> > &num_total, const int num_ana, const int num_chart)
+void AnalysisUtils::s3_zdbd_ana(const int num_chart)
 {
-    // num_total 目前的格式:
-    // 最后的 num_ana 期之前
-    // 原始数据: sn(期号),n1(号1),n2(号2),n3(号3),n4(号4),n5(号5)  pointer(0-5)
-    // 最后的 num_ana 期
-    // 跟随表: 多出了55个数字, desc11(11个号码的出现次数降序排序) * 5 = 55 个数字   point(6-60)
-    // 主动表: 多出了5个数字 pointer(61-65)
-    // 被动表: 多出了5个数字 pointer(66-70)
 
     // 临时存储个数的 QVector 1-21
     QVector<int> temp(21);
 
+    // 清空数据
+    DataAll::numbers_chart.clear();
+
+    QVector<int> vector_temp_group;
+
     // 循环 最后的 num_chart 期数据, 不包含最后的一期
-    for (int num_now = num_total.length() - num_chart; num_now < num_total.length() - 1; ++num_now) {
+    for (int num_now = DataAll::numbers_zdbd.length() - num_chart; num_now < DataAll::numbers_zdbd.length(); ++num_now) {
 
         // 清空临时数组
         temp.fill(0);
 
-        // 主动单
-        // 目标: 主动单: 多出5个数字 pointer(71-75)
+        // 临时数据清空
+        vector_temp_group.clear();
+        // vector_temp_group 存储号码
+        vector_temp_group << DataAll::numbers_zdbd[num_now].mid(0, 6);
 
+        // 主动单
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
-            int num = num_total[num_now][loop5];
-            for (int loop_ana = num_total.length() - num_ana; loop_ana < num_now; ++loop_ana) {
-                if (num_total[loop_ana].mid(1,5).contains(num)) {
-                    temp[num_total[loop_ana][61] - 1] += 1;
-                    temp[num_total[loop_ana][62] - 1] += 1;
-                    temp[num_total[loop_ana][63] - 1] += 1;
-                    temp[num_total[loop_ana][64] - 1] += 1;
-                    temp[num_total[loop_ana][65] - 1] += 1;
+            int num = DataAll::numbers_zdbd[num_now][loop5];
+            for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
+                if (DataAll::numbers_zdbd[loop_ana].mid(1, 5).contains(num)) {
+                    temp[DataAll::numbers_zdbd[loop_ana][11] - 1] += 1;
+                    temp[DataAll::numbers_zdbd[loop_ana][12] - 1] += 1;
+                    temp[DataAll::numbers_zdbd[loop_ana][13] - 1] += 1;
+                    temp[DataAll::numbers_zdbd[loop_ana][14] - 1] += 1;
+                    temp[DataAll::numbers_zdbd[loop_ana][15] - 1] += 1;
                 }
             }
 
             // temp 排序
             VectorDesc(temp);
-            int position = temp.indexOf(num_total[num_now][60 + loop5]) + 1;
+            int position = temp.indexOf(DataAll::numbers_zdbd[num_now][10 + loop5]) + 1;
             temp.fill(0);
-            num_total[num_now] << position;
+            // vector_temp_group 存储号码 + 主动计算结果
+            vector_temp_group << position;
         }
 
         // 被动单
         // 目标: 被动单: 多出5个数字 pointer(76-80)
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
-            int num = num_total[num_now + 1][loop5];
-            for (int loop_ana = num_total.length() - num_ana + 1; loop_ana < num_now; ++loop_ana) {
-                if (num_total[loop_ana].mid(1, 5).contains(num)) {
-                    int position = num_total[loop_ana].mid(1, 5).indexOf(num);
-                    temp[num_total[loop_ana - 1][66 + position] - 1] += 1;
+            int num = DataAll::numbers_zdbd[num_now][loop5 + 5];
+            for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
+                if (DataAll::numbers_zdbd[loop_ana].mid(6, 5).contains(num)) {
+                    temp[DataAll::numbers_zdbd[loop_ana][loop5 + 15] - 1] += 1;
                 }
             }
 
             // temp 排序
             VectorDesc(temp);
-            int position = temp.indexOf(num_total[num_now][65 + loop5]) + 1;
+            int position = temp.indexOf(DataAll::numbers_zdbd[num_now][15 + loop5]) + 1;
             temp.fill(0);
-            num_total[num_now] << position;
+            // vector_temp_group 存储号码 + 主动计算结果 + 被动计算结果
+            vector_temp_group << position;
         }
 
+
+
     }
+
+    // 保存数据
+    DataAll::numbers_chart << vector_temp_group;
 }
 
 /**
