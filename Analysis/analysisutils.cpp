@@ -226,6 +226,48 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
         }
 
 
+        // 主动单
+        // 循环 1-5 个号码
+        for (int loop5 = 1; loop5 <= 5; ++loop5) {
+            int num = DataAll::numbers_zdbd[num_now][loop5];
+            for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
+                temp[DataAll::numbers_zdbd[loop_ana][11] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][12] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][13] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][14] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][15] - 1] += 1;
+            }
+
+            // temp 排序
+            VectorDesc(temp);
+            int position = temp.indexOf(DataAll::numbers_zdbd[num_now][10 + loop5]) + 1;
+            temp.fill(0);
+            // vector_temp_group 存储号码 + 主动计算结果
+            vector_temp_group << position;
+        }
+
+        // 被动单
+        // 目标: 被动单: 多出5个数字 pointer(76-80)
+        // 循环 1-5 个号码
+        for (int loop5 = 1; loop5 <= 5; ++loop5) {
+            int num = DataAll::numbers_zdbd[num_now][loop5 + 5];
+            for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
+                temp[DataAll::numbers_zdbd[loop_ana][16] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][17] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][18] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][19] - 1] += 1;
+                temp[DataAll::numbers_zdbd[loop_ana][20] - 1] += 1;
+            }
+
+            // temp 排序
+            VectorDesc(temp);
+            int position = temp.indexOf(DataAll::numbers_zdbd[num_now][15 + loop5]) + 1;
+            temp.fill(0);
+            // vector_temp_group 存储号码 + 主动计算结果 + 被动计算结果
+            vector_temp_group << position;
+        }
+
+
 
     }
 
