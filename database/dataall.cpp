@@ -112,6 +112,32 @@ void DataAll::zdbd_to_database()
     }
 }
 
+void DataAll::chart_to_database()
+{
+    // DataAll::numbers_zdbd 写入数据库
+    // 获取数据库连接，测试连接是否成功
+    QSqlDatabase db = QSqlDatabase::database();
+    bool ok = db.open();
+    if(!ok){
+        QMessageBox::information(NULL, "数据库连接失败", "数据库连接失败!!!", QMessageBox::Ok);
+    }
+
+    QSqlQuery query;
+    query.exec("DELETE FROM chart");
+    foreach (QVector<int> var, DataAll::numbers_chart) {
+        query.prepare("insert into chart (sn, n1, n2, n3, n4, n5, "
+                      "zdd1, zdd2, zdd3, zdd4, zdd5, bdd1, bdd2, bdd3, bdd4, bdd5, "
+                      "zdz1, zdz2, zdz3, zdz4, zdz5, bdz1, bdz2, bdz3, bdz4, bdz5) "
+                      "VALUES (?, ?, ?, ?, ?, ?, "
+                      "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+                      "?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        foreach (int temp, var) {
+            query.addBindValue(temp);
+        }
+        query.exec();
+    }
+}
+
 QVector<QVector<int>> DataAll::numbers_all;
 QVector<QVector<int>> DataAll::numbers_ana;
 QVector<QVector<int>> DataAll::numbers_zdbd;

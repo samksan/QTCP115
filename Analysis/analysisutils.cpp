@@ -267,12 +267,12 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
             vector_temp_group << position;
         }
 
-
-
+        // 保存数据
+        DataAll::numbers_chart << vector_temp_group;
     }
 
-    // 保存数据
-    DataAll::numbers_chart << vector_temp_group;
+    // DataAll::numbers_chart 存储到数据库中
+    DataAll::chart_to_database();
 }
 
 /**

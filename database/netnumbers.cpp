@@ -96,6 +96,10 @@ void NetNumbers::initQSQLDatabase()
                "n1 int, n2 int, n3 int, n4 int, n5 int, nn1 int, nn2 int, nn3 int, nn4 int, nn5 int, "
                "zd1 int,zd2 int,zd3 int,zd4 int,zd5 int,bd1 int, bd2 int,bd3 int,bd4 int,bd5 int)");
 
+    query.exec("create table if not exists chart(sn int primarykey, n1 int, n2 int, n3 int, n4 int, n5 int, "
+               "zdd1 int, zdd2 int, zdd3 int, zdd4 int, zdd5 int, bdd1 int, bdd2 int, bdd3 int, bdd4 int, bdd5 int, "
+               "zdz1 int, zdz2 int, zdz3 int,zdz4 int, zdz5 int, bdz1 int, bdz2 int, bdz3 int, bdz4 int, bdz5 int)");
+
 }
 
 /**
