@@ -44,6 +44,30 @@ private slots:
 
     void on_btn_show_ana_clicked();
 
+    void on_pushButton_zdd1_clicked();
+
+    void on_pushButton_zdd2_clicked();
+
+    void on_pushButton_zdd3_clicked();
+
+    void on_pushButton_bdd1_clicked();
+
+    void on_pushButton_bdd2_clicked();
+
+    void on_pushButton_bdd3_clicked();
+
+    void on_pushButton_zdz1_clicked();
+
+    void on_pushButton_zdz2_clicked();
+
+    void on_pushButton_zdz3_clicked();
+
+    void on_pushButton_bdz1_clicked();
+
+    void on_pushButton_bdz2_clicked();
+
+    void on_pushButton_bdz3_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

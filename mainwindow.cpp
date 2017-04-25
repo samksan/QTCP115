@@ -280,3 +280,255 @@ void MainWindow::on_btn_show_chart_clicked()
 {
 
 }
+
+void MainWindow::on_pushButton_zdd1_clicked()
+{
+    if(ui->check_zdd01->isChecked()){
+        ui->check_zdd01->setChecked(false);
+        ui->check_zdd02->setChecked(false);
+        ui->check_zdd03->setChecked(false);
+        ui->check_zdd04->setChecked(false);
+        ui->check_zdd05->setChecked(false);
+        ui->check_zdd06->setChecked(false);
+        ui->check_zdd07->setChecked(false);
+    }else{
+        ui->check_zdd01->setChecked(true);
+        ui->check_zdd02->setChecked(true);
+        ui->check_zdd03->setChecked(true);
+        ui->check_zdd04->setChecked(true);
+        ui->check_zdd05->setChecked(true);
+        ui->check_zdd06->setChecked(true);
+        ui->check_zdd07->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_zdd2_clicked()
+{
+    if(ui->check_zdd08->isChecked()){
+        ui->check_zdd08->setChecked(false);
+        ui->check_zdd09->setChecked(false);
+        ui->check_zdd10->setChecked(false);
+        ui->check_zdd11->setChecked(false);
+        ui->check_zdd12->setChecked(false);
+        ui->check_zdd13->setChecked(false);
+        ui->check_zdd14->setChecked(false);
+    }else{
+        ui->check_zdd08->setChecked(true);
+        ui->check_zdd09->setChecked(true);
+        ui->check_zdd10->setChecked(true);
+        ui->check_zdd11->setChecked(true);
+        ui->check_zdd12->setChecked(true);
+        ui->check_zdd13->setChecked(true);
+        ui->check_zdd14->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_zdd3_clicked()
+{
+    if(ui->check_zdd15->isChecked()){
+        ui->check_zdd15->setChecked(false);
+        ui->check_zdd16->setChecked(false);
+        ui->check_zdd17->setChecked(false);
+        ui->check_zdd18->setChecked(false);
+        ui->check_zdd19->setChecked(false);
+        ui->check_zdd20->setChecked(false);
+        ui->check_zdd21->setChecked(false);
+    }else{
+        ui->check_zdd15->setChecked(true);
+        ui->check_zdd16->setChecked(true);
+        ui->check_zdd17->setChecked(true);
+        ui->check_zdd18->setChecked(true);
+        ui->check_zdd19->setChecked(true);
+        ui->check_zdd20->setChecked(true);
+        ui->check_zdd21->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdd1_clicked()
+{
+    if(ui->check_bdd01->isChecked()){
+        ui->check_bdd01->setChecked(false);
+        ui->check_bdd02->setChecked(false);
+        ui->check_bdd03->setChecked(false);
+        ui->check_bdd04->setChecked(false);
+        ui->check_bdd05->setChecked(false);
+        ui->check_bdd06->setChecked(false);
+        ui->check_bdd07->setChecked(false);
+    }else{
+        ui->check_bdd01->setChecked(true);
+        ui->check_bdd02->setChecked(true);
+        ui->check_bdd03->setChecked(true);
+        ui->check_bdd04->setChecked(true);
+        ui->check_bdd05->setChecked(true);
+        ui->check_bdd06->setChecked(true);
+        ui->check_bdd07->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdd2_clicked()
+{
+    if(ui->check_bdd08->isChecked()){
+        ui->check_bdd08->setChecked(false);
+        ui->check_bdd09->setChecked(false);
+        ui->check_bdd10->setChecked(false);
+        ui->check_bdd11->setChecked(false);
+        ui->check_bdd12->setChecked(false);
+        ui->check_bdd13->setChecked(false);
+        ui->check_bdd14->setChecked(false);
+    }else{
+        ui->check_bdd08->setChecked(true);
+        ui->check_bdd09->setChecked(true);
+        ui->check_bdd10->setChecked(true);
+        ui->check_bdd11->setChecked(true);
+        ui->check_bdd12->setChecked(true);
+        ui->check_bdd13->setChecked(true);
+        ui->check_bdd14->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdd3_clicked()
+{
+    if(ui->check_bdd15->isChecked()){
+        ui->check_bdd15->setChecked(false);
+        ui->check_bdd16->setChecked(false);
+        ui->check_bdd17->setChecked(false);
+        ui->check_bdd18->setChecked(false);
+        ui->check_bdd19->setChecked(false);
+        ui->check_bdd20->setChecked(false);
+        ui->check_bdd21->setChecked(false);
+    }else{
+        ui->check_bdd15->setChecked(true);
+        ui->check_bdd16->setChecked(true);
+        ui->check_bdd17->setChecked(true);
+        ui->check_bdd18->setChecked(true);
+        ui->check_bdd19->setChecked(true);
+        ui->check_bdd20->setChecked(true);
+        ui->check_bdd21->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_zdz1_clicked()
+{
+    if(ui->check_zdz01->isChecked()){
+        ui->check_zdz01->setChecked(false);
+        ui->check_zdz02->setChecked(false);
+        ui->check_zdz03->setChecked(false);
+        ui->check_zdz04->setChecked(false);
+        ui->check_zdz05->setChecked(false);
+        ui->check_zdz06->setChecked(false);
+        ui->check_zdz07->setChecked(false);
+    }else{
+        ui->check_zdz01->setChecked(true);
+        ui->check_zdz02->setChecked(true);
+        ui->check_zdz03->setChecked(true);
+        ui->check_zdz04->setChecked(true);
+        ui->check_zdz05->setChecked(true);
+        ui->check_zdz06->setChecked(true);
+        ui->check_zdz07->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_zdz2_clicked()
+{
+    if(ui->check_zdz08->isChecked()){
+        ui->check_zdz08->setChecked(false);
+        ui->check_zdz09->setChecked(false);
+        ui->check_zdz10->setChecked(false);
+        ui->check_zdz11->setChecked(false);
+        ui->check_zdz12->setChecked(false);
+        ui->check_zdz13->setChecked(false);
+        ui->check_zdz14->setChecked(false);
+    }else{
+        ui->check_zdz08->setChecked(true);
+        ui->check_zdz09->setChecked(true);
+        ui->check_zdz10->setChecked(true);
+        ui->check_zdz11->setChecked(true);
+        ui->check_zdz12->setChecked(true);
+        ui->check_zdz13->setChecked(true);
+        ui->check_zdz14->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_zdz3_clicked()
+{
+    if(ui->check_zdz15->isChecked()){
+        ui->check_zdz15->setChecked(false);
+        ui->check_zdz16->setChecked(false);
+        ui->check_zdz17->setChecked(false);
+        ui->check_zdz18->setChecked(false);
+        ui->check_zdz19->setChecked(false);
+        ui->check_zdz20->setChecked(false);
+        ui->check_zdz21->setChecked(false);
+    }else{
+        ui->check_zdz15->setChecked(true);
+        ui->check_zdz16->setChecked(true);
+        ui->check_zdz17->setChecked(true);
+        ui->check_zdz18->setChecked(true);
+        ui->check_zdz19->setChecked(true);
+        ui->check_zdz20->setChecked(true);
+        ui->check_zdz21->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdz1_clicked()
+{
+    if(ui->check_bdz01->isChecked()){
+        ui->check_bdz01->setChecked(false);
+        ui->check_bdz02->setChecked(false);
+        ui->check_bdz03->setChecked(false);
+        ui->check_bdz04->setChecked(false);
+        ui->check_bdz05->setChecked(false);
+        ui->check_bdz06->setChecked(false);
+        ui->check_bdz07->setChecked(false);
+    }else{
+        ui->check_bdz01->setChecked(true);
+        ui->check_bdz02->setChecked(true);
+        ui->check_bdz03->setChecked(true);
+        ui->check_bdz04->setChecked(true);
+        ui->check_bdz05->setChecked(true);
+        ui->check_bdz06->setChecked(true);
+        ui->check_bdz07->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdz2_clicked()
+{
+    if(ui->check_bdz08->isChecked()){
+        ui->check_bdz08->setChecked(false);
+        ui->check_bdz09->setChecked(false);
+        ui->check_bdz10->setChecked(false);
+        ui->check_bdz11->setChecked(false);
+        ui->check_bdz12->setChecked(false);
+        ui->check_bdz13->setChecked(false);
+        ui->check_bdz14->setChecked(false);
+    }else{
+        ui->check_bdz08->setChecked(true);
+        ui->check_bdz09->setChecked(true);
+        ui->check_bdz10->setChecked(true);
+        ui->check_bdz11->setChecked(true);
+        ui->check_bdz12->setChecked(true);
+        ui->check_bdz13->setChecked(true);
+        ui->check_bdz14->setChecked(true);
+    }
+}
+
+void MainWindow::on_pushButton_bdz3_clicked()
+{
+    if(ui->check_bdz15->isChecked()){
+        ui->check_bdz15->setChecked(false);
+        ui->check_bdz16->setChecked(false);
+        ui->check_bdz17->setChecked(false);
+        ui->check_bdz18->setChecked(false);
+        ui->check_bdz19->setChecked(false);
+        ui->check_bdz20->setChecked(false);
+        ui->check_bdz21->setChecked(false);
+    }else{
+        ui->check_bdz15->setChecked(true);
+        ui->check_bdz16->setChecked(true);
+        ui->check_bdz17->setChecked(true);
+        ui->check_bdz18->setChecked(true);
+        ui->check_bdz19->setChecked(true);
+        ui->check_bdz20->setChecked(true);
+        ui->check_bdz21->setChecked(true);
+    }
+}
