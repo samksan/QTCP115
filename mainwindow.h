@@ -40,10 +40,6 @@ private slots:
 
     void on_btn_data_refresh_clicked();
 
-    void on_btn_show_chart_clicked();
-
-    void on_btn_show_ana_clicked();
-
     void on_pushButton_zdd1_clicked();
 
     void on_pushButton_zdd2_clicked();

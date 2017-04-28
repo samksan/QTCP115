@@ -244,42 +244,6 @@ void MainWindow::on_btn_data_refresh_clicked()
 
 }
 
-/**
- * @brief MainWindow::on_btn_show_chart_clicked 显示分析号码的第1步的结果集
- */
-void MainWindow::on_btn_show_ana_clicked()
-{
-
-
-    // Qt Model-View 显示数据库
-//    QSqlTableModel *model = new QSqlTableModel(this);
-//    model->setTable("ana");
-//    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-//    model->select();
-//    model->setHeaderData(0, Qt::Horizontal, tr("期号"));
-//    model->setHeaderData(1, Qt::Horizontal, tr("一"));
-//    model->setHeaderData(2, Qt::Horizontal, tr("二"));
-//    model->setHeaderData(3, Qt::Horizontal, tr("三"));
-//    model->setHeaderData(4, Qt::Horizontal, tr("四"));
-//    model->setHeaderData(5, Qt::Horizontal, tr("五"));
-
-//    ui->tableView_number->setModel(model);
-//    ui->tableView_number->setColumnWidth(0,290);
-//    ui->tableView_number->setColumnWidth(1,100);
-//    ui->tableView_number->setColumnWidth(2,100);
-//    ui->tableView_number->setColumnWidth(3,100);
-//    ui->tableView_number->setColumnWidth(4,100);
-//    ui->tableView_number->setColumnWidth(5,100);
-
-}
-
-/**
- * @brief MainWindow::on_btn_show_ana_clicked 显示分析号码的第2步的结果集
- */
-void MainWindow::on_btn_show_chart_clicked()
-{
-
-}
 
 void MainWindow::on_pushButton_zdd1_clicked()
 {
