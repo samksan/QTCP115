@@ -29,6 +29,13 @@ public:
      */
     static QVector<QVector<int>> numbers_ana;
 
+    /**
+     * @brief numbers_filter 号码过滤结果
+     */
+    static QVector<QVector<int>> numbers_filter;
+
+    static void init_numbers_filter();
+
     static void ana_to_database();
 
     static void zdbd_to_database();

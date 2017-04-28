@@ -496,3 +496,191 @@ void MainWindow::on_pushButton_bdz3_clicked()
         ui->check_bdz21->setChecked(true);
     }
 }
+
+/**
+ * @brief MainWindow::on_pushButton_filter_clicked 遗传过滤按钮事件
+ */
+void MainWindow::on_pushButton_filter_clicked()
+{
+    QVector<int> zdd, zdz, bdd, bdz;
+
+    zdd.clear();
+    if(ui->check_zdd01->isChecked())
+        zdd << 1;
+    if(ui->check_zdd02->isChecked())
+        zdd << 2;
+    if(ui->check_zdd03->isChecked())
+        zdd << 3;
+    if(ui->check_zdd04->isChecked())
+        zdd << 4;
+    if(ui->check_zdd05->isChecked())
+        zdd << 5;
+    if(ui->check_zdd06->isChecked())
+        zdd << 6;
+    if(ui->check_zdd07->isChecked())
+        zdd << 7;
+    if(ui->check_zdd08->isChecked())
+        zdd << 8;
+    if(ui->check_zdd09->isChecked())
+        zdd << 9;
+    if(ui->check_zdd10->isChecked())
+        zdd << 10;
+    if(ui->check_zdd11->isChecked())
+        zdd << 11;
+    if(ui->check_zdd12->isChecked())
+        zdd << 12;
+    if(ui->check_zdd13->isChecked())
+        zdd << 13;
+    if(ui->check_zdd14->isChecked())
+        zdd << 14;
+    if(ui->check_zdd15->isChecked())
+        zdd << 15;
+    if(ui->check_zdd16->isChecked())
+        zdd << 16;
+    if(ui->check_zdd17->isChecked())
+        zdd << 17;
+    if(ui->check_zdd18->isChecked())
+        zdd << 18;
+    if(ui->check_zdd19->isChecked())
+        zdd << 19;
+    if(ui->check_zdd20->isChecked())
+        zdd << 20;
+    if(ui->check_zdd21->isChecked())
+        zdd << 21;
+
+    zdz.clear();
+    if(ui->check_zdz01->isChecked())
+        zdz << 1;
+    if(ui->check_zdz02->isChecked())
+        zdz << 2;
+    if(ui->check_zdz03->isChecked())
+        zdz << 3;
+    if(ui->check_zdz04->isChecked())
+        zdz << 4;
+    if(ui->check_zdz05->isChecked())
+        zdz << 5;
+    if(ui->check_zdz06->isChecked())
+        zdz << 6;
+    if(ui->check_zdz07->isChecked())
+        zdz << 7;
+    if(ui->check_zdz08->isChecked())
+        zdz << 8;
+    if(ui->check_zdz09->isChecked())
+        zdz << 9;
+    if(ui->check_zdz10->isChecked())
+        zdz << 10;
+    if(ui->check_zdz11->isChecked())
+        zdz << 11;
+    if(ui->check_zdz12->isChecked())
+        zdz << 12;
+    if(ui->check_zdz13->isChecked())
+        zdz << 13;
+    if(ui->check_zdz14->isChecked())
+        zdz << 14;
+    if(ui->check_zdz15->isChecked())
+        zdz << 15;
+    if(ui->check_zdz16->isChecked())
+        zdz << 16;
+    if(ui->check_zdz17->isChecked())
+        zdz << 17;
+    if(ui->check_zdz18->isChecked())
+        zdz << 18;
+    if(ui->check_zdz19->isChecked())
+        zdz << 19;
+    if(ui->check_zdz20->isChecked())
+        zdz << 20;
+    if(ui->check_zdz21->isChecked())
+        zdz << 21;
+
+    bdd.clear();
+    if(ui->check_bdd01->isChecked())
+        bdd << 1;
+    if(ui->check_bdd02->isChecked())
+        bdd << 2;
+    if(ui->check_bdd03->isChecked())
+        bdd << 3;
+    if(ui->check_bdd04->isChecked())
+        bdd << 4;
+    if(ui->check_bdd05->isChecked())
+        bdd << 5;
+    if(ui->check_bdd06->isChecked())
+        bdd << 6;
+    if(ui->check_bdd07->isChecked())
+        bdd << 7;
+    if(ui->check_bdd08->isChecked())
+        bdd << 8;
+    if(ui->check_bdd09->isChecked())
+        bdd << 9;
+    if(ui->check_bdd10->isChecked())
+        bdd << 10;
+    if(ui->check_bdd11->isChecked())
+        bdd << 11;
+    if(ui->check_bdd12->isChecked())
+        bdd << 12;
+    if(ui->check_bdd13->isChecked())
+        bdd << 13;
+    if(ui->check_bdd14->isChecked())
+        bdd << 14;
+    if(ui->check_bdd15->isChecked())
+        bdd << 15;
+    if(ui->check_bdd16->isChecked())
+        bdd << 16;
+    if(ui->check_bdd17->isChecked())
+        bdd << 17;
+    if(ui->check_bdd18->isChecked())
+        bdd << 18;
+    if(ui->check_bdd19->isChecked())
+        bdd << 19;
+    if(ui->check_bdd20->isChecked())
+        bdd << 20;
+    if(ui->check_bdd21->isChecked())
+        bdd << 21;
+
+    bdz.clear();
+    if(ui->check_bdz01->isChecked())
+        bdz << 1;
+    if(ui->check_bdz02->isChecked())
+        bdz << 2;
+    if(ui->check_bdz03->isChecked())
+        bdz << 3;
+    if(ui->check_bdz04->isChecked())
+        bdz << 4;
+    if(ui->check_bdz05->isChecked())
+        bdz << 5;
+    if(ui->check_bdz06->isChecked())
+        bdz << 6;
+    if(ui->check_bdz07->isChecked())
+        bdz << 7;
+    if(ui->check_bdz08->isChecked())
+        bdz << 8;
+    if(ui->check_bdz09->isChecked())
+        bdz << 9;
+    if(ui->check_bdz10->isChecked())
+        bdz << 10;
+    if(ui->check_bdz11->isChecked())
+        bdz << 11;
+    if(ui->check_bdz12->isChecked())
+        bdz << 12;
+    if(ui->check_bdz13->isChecked())
+        bdz << 13;
+    if(ui->check_bdz14->isChecked())
+        bdz << 14;
+    if(ui->check_bdz15->isChecked())
+        bdz << 15;
+    if(ui->check_bdz16->isChecked())
+        bdz << 16;
+    if(ui->check_bdz17->isChecked())
+        bdz << 17;
+    if(ui->check_bdz18->isChecked())
+        bdz << 18;
+    if(ui->check_bdz19->isChecked())
+        bdz << 19;
+    if(ui->check_bdz20->isChecked())
+        bdz << 20;
+    if(ui->check_bdz21->isChecked())
+        bdz << 21;
+
+    AnalysisUtils::s4_filter(zdd, zdz, bdd, bdz);
+}
+
+

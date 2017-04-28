@@ -39,7 +39,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab">
            <property name="sizePolicy">
@@ -520,7 +520,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>10</string>
+                 <string>50</string>
                 </property>
                 <item>
                  <property name="text">
@@ -968,7 +968,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>10</string>
+                 <string>30</string>
                 </property>
                 <item>
                  <property name="text">
@@ -1419,7 +1419,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>3</string>
+                 <string>10</string>
                 </property>
                 <item>
                  <property name="text">
@@ -3254,7 +3254,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="pushButton_filter">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>

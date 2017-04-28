@@ -56,6 +56,27 @@ void DataAll::InitMap()
     DataAll::dic_num_desc[21] = 500;
 }
 
+void DataAll::init_numbers_filter()
+{
+    numbers_filter.clear();
+    QVector<int> temp;
+    for (int var1 = 1; var1 <= 7; ++var1) {
+        for (int var2 = 2; var2 <= 8; ++var2) {
+            for (int var3 = 3; var3 <= 9; ++var3) {
+                for (int var4 = 4; var4 <= 10; ++var4) {
+                    for (int var5 = 5; var5 <= 11; ++var5) {
+                        if(var1<var2 && var2<var3 && var3<var4 && var4<var5){
+                            temp << var1 << var2 << var3 << var4 << var5;
+                            numbers_filter << temp;
+                            temp.clear();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void DataAll::ana_to_database()
 {
     // DataAll::numbers_ana 写入数据库
@@ -142,5 +163,6 @@ QVector<QVector<int>> DataAll::numbers_all;
 QVector<QVector<int>> DataAll::numbers_ana;
 QVector<QVector<int>> DataAll::numbers_zdbd;
 QVector<QVector<int>> DataAll::numbers_chart;
+QVector<QVector<int>> DataAll::numbers_filter;
 QMap<int,int> DataAll::dic_desc_num;
 QMap<int,int> DataAll::dic_num_desc;

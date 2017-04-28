@@ -274,6 +274,22 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
 }
 
 /**
+ * @brief AnalysisUtils::s4_filter 第四步: 过滤号码
+ * @param zdd 主动单的过滤条件, 1-21 的集合
+ * @param zdz 主动整的过滤条件, 1-21 的集合
+ * @param bdd 被动单的过滤条件, 1-21 的集合
+ * @param bdz 被动整的过滤条件, 1-21 的集合
+ */
+void AnalysisUtils::s4_filter(const QVector<int> zdd, const QVector<int> zdz, const QVector<int> bdd, const QVector<int> bdz)
+{
+    DataAll::init_numbers_filter();
+    foreach (QVector<int> temp, DataAll::numbers_filter) {
+        qDebug() << temp;
+    }
+    qDebug() << "numbers_filter 的总数为: " << DataAll::numbers_filter.length();
+}
+
+/**
  * @brief VectorDesc 修改传入的 QVector, 变成 1-11 的出现次数的多少排序DESC
  * @param vector 11个号码的出现次数
  */

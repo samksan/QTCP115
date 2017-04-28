@@ -64,6 +64,8 @@ private slots:
 
     void on_pushButton_bdz3_clicked();
 
+    void on_pushButton_filter_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
