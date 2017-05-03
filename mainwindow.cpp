@@ -809,6 +809,13 @@ void MainWindow::chart_view(int position)
     chart->createDefaultAxes();
     chart->setTitle("分析结果走势图");
 
+    series->setPointLabelsVisible(true);
+    series->setPointsVisible(true);
+    series->setPointLabelsFormat("@yPoint");
+    series->setPen(QPen(Qt::darkGreen,1,Qt::SolidLine));
+    series->setPointLabelsClipping(false);
+    series->setPointLabelsFont(QFont("menlo",16,QFont::Bold));
+
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 

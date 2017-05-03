@@ -499,7 +499,7 @@
           </widget>
           <widget class="QWidget" name="tab_test">
            <attribute name="title">
-            <string>测试参数</string>
+            <string>分析</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
@@ -520,7 +520,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>10</string>
+                 <string>50</string>
                 </property>
                 <item>
                  <property name="text">
@@ -968,7 +968,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>10</string>
+                 <string>30</string>
                 </property>
                 <item>
                  <property name="text">
@@ -1419,7 +1419,7 @@
                  </sizepolicy>
                 </property>
                 <property name="currentText">
-                 <string>3</string>
+                 <string>6</string>
                 </property>
                 <item>
                  <property name="text">
@@ -1722,10 +1722,10 @@
                  <number>60</number>
                 </property>
                 <property name="value">
-                 <number>10</number>
+                 <number>6</number>
                 </property>
                 <property name="sliderPosition">
-                 <number>10</number>
+                 <number>6</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -1771,7 +1771,7 @@
           </widget>
           <widget class="QWidget" name="tab_chart">
            <attribute name="title">
-            <string>分析结果图表</string>
+            <string>图表</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
@@ -1996,7 +1996,7 @@
           </widget>
           <widget class="QWidget" name="tab_analysis">
            <attribute name="title">
-            <string>遗传过滤</string>
+            <string>过滤</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
