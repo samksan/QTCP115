@@ -70,8 +70,46 @@ private slots:
 
     void on_chart_zdd_2_clicked();
 
+    void on_chart_zdd_3_clicked();
+
+    void on_chart_zdd_4_clicked();
+
+    void on_chart_zdd_5_clicked();
+
+    void on_chart_bdd_1_clicked();
+
+    void on_chart_bdd_2_clicked();
+
+    void on_chart_bdd_3_clicked();
+
+    void on_chart_bdd_4_clicked();
+
+    void on_chart_bdd_5_clicked();
+
+    void on_chart_zdz_1_clicked();
+
+    void on_chart_zdz_2_clicked();
+
+    void on_chart_zdz_3_clicked();
+
+    void on_chart_zdz_4_clicked();
+
+    void on_chart_zdz_5_clicked();
+
+    void on_chart_bdz_1_clicked();
+
+    void on_chart_bdz_2_clicked();
+
+    void on_chart_bdz_3_clicked();
+
+    void on_chart_bdz_4_clicked();
+
+    void on_chart_bdz_5_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    void chart_view(int position);
 };
 
 #endif // MAINWINDOW_H

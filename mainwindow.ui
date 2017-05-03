@@ -39,7 +39,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab">
            <property name="sizePolicy">
@@ -1987,7 +1987,7 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_chart"/>
+                <layout class="QHBoxLayout" name="chart_layout"/>
                </item>
               </layout>
              </widget>

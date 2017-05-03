@@ -689,60 +689,133 @@ void MainWindow::on_pushButton_filter_clicked()
 
 void MainWindow::on_chart_zdd_1_clicked()
 {
-    QLineSeries *series = new QLineSeries();
-
-    series->append(1, 6);
-    series->append(2, 4);
-    series->append(3, 8);
-    series->append(4, 4);
-    series->append(5, 5);
-
-    QChart *chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-    chart->setTitle("Simple line chart example");
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    if(ui->horizontalLayout_chart->widget()){
-
-        QWidget *temp = ui->horizontalLayout_chart->widget();
-        ui->horizontalLayout_chart->removeWidget(temp);
-    }
-
-    ui->horizontalLayout_chart->addWidget(chartView);
-
-
+    this->chart_view(6);
 }
 
 void MainWindow::on_chart_zdd_2_clicked()
 {
+    this->chart_view(7);
+}
+
+void MainWindow::on_chart_zdd_3_clicked()
+{
+    this->chart_view(8);
+}
+
+void MainWindow::on_chart_zdd_4_clicked()
+{
+    this->chart_view(9);
+}
+
+void MainWindow::on_chart_zdd_5_clicked()
+{
+    this->chart_view(10);
+}
+
+void MainWindow::on_chart_bdd_1_clicked()
+{
+    this->chart_view(11);
+}
+
+void MainWindow::on_chart_bdd_2_clicked()
+{
+    this->chart_view(12);
+}
+
+void MainWindow::on_chart_bdd_3_clicked()
+{
+    this->chart_view(13);
+}
+
+void MainWindow::on_chart_bdd_4_clicked()
+{
+    this->chart_view(14);
+}
+
+void MainWindow::on_chart_bdd_5_clicked()
+{
+    this->chart_view(15);
+}
+
+void MainWindow::on_chart_zdz_1_clicked()
+{
+    this->chart_view(16);
+}
+
+void MainWindow::on_chart_zdz_2_clicked()
+{
+    this->chart_view(17);
+}
+
+void MainWindow::on_chart_zdz_3_clicked()
+{
+    this->chart_view(18);
+}
+
+void MainWindow::on_chart_zdz_4_clicked()
+{
+    this->chart_view(19);
+}
+
+void MainWindow::on_chart_zdz_5_clicked()
+{
+    this->chart_view(20);
+}
+
+void MainWindow::on_chart_bdz_1_clicked()
+{
+    this->chart_view(21);
+}
+
+void MainWindow::on_chart_bdz_2_clicked()
+{
+    this->chart_view(22);
+}
+
+void MainWindow::on_chart_bdz_3_clicked()
+{
+    this->chart_view(23);
+}
+
+void MainWindow::on_chart_bdz_4_clicked()
+{
+    this->chart_view(24);
+}
+
+void MainWindow::on_chart_bdz_5_clicked()
+{
+    this->chart_view(25);
+}
+
+/**
+ * @brief MainWindow::chart_view 图表显示函数
+ * @param position 数据在 vector 中的位置
+ */
+void MainWindow::chart_view(int position)
+{
+    if(DataAll::numbers_chart.isEmpty()){
+        QMessageBox::information(NULL, tr("没有数据"), tr("必须分析数据之后才可以查看结果"), QMessageBox::Ok);
+        return;
+    }
     QLineSeries *series = new QLineSeries();
 
-    series->append(1, 2);
-    series->append(2, 3);
-    series->append(3, 4);
-    series->append(4, 5);
-    series->append(5, 6);
+    for (int var = 0; var < DataAll::numbers_chart.length(); ++var) {
+        series->append(var,DataAll::numbers_chart[var][position]);
+    }
 
     QChart *chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
-    chart->setTitle("Simple line chart example");
+    chart->setTitle("分析结果走势图");
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    if(ui->horizontalLayout_chart->widget()){
-
-        QWidget *temp = ui->horizontalLayout_chart->widget();
-        ui->horizontalLayout_chart->removeWidget(temp);
+    if(!ui->chart_layout->isEmpty()){
+        ui->chart_layout->removeItem(ui->chart_layout->itemAt(0));
+        ui->chart_layout->addWidget(chartView);
+    }else{
+        ui->chart_layout->addWidget(chartView);
     }
-
-    ui->horizontalLayout_chart->addWidget(chartView);
-
-
 }
