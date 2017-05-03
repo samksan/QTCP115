@@ -16,6 +16,8 @@
 #include "Analysis/analysisutils.h"
 #include "database/dataall.h"
 
+#include <QtCharts>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -684,3 +686,63 @@ void MainWindow::on_pushButton_filter_clicked()
 }
 
 
+
+void MainWindow::on_chart_zdd_1_clicked()
+{
+    QLineSeries *series = new QLineSeries();
+
+    series->append(1, 6);
+    series->append(2, 4);
+    series->append(3, 8);
+    series->append(4, 4);
+    series->append(5, 5);
+
+    QChart *chart = new QChart();
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    chart->setTitle("Simple line chart example");
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    if(ui->horizontalLayout_chart->widget()){
+
+        QWidget *temp = ui->horizontalLayout_chart->widget();
+        ui->horizontalLayout_chart->removeWidget(temp);
+    }
+
+    ui->horizontalLayout_chart->addWidget(chartView);
+
+
+}
+
+void MainWindow::on_chart_zdd_2_clicked()
+{
+    QLineSeries *series = new QLineSeries();
+
+    series->append(1, 2);
+    series->append(2, 3);
+    series->append(3, 4);
+    series->append(4, 5);
+    series->append(5, 6);
+
+    QChart *chart = new QChart();
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    chart->setTitle("Simple line chart example");
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    if(ui->horizontalLayout_chart->widget()){
+
+        QWidget *temp = ui->horizontalLayout_chart->widget();
+        ui->horizontalLayout_chart->removeWidget(temp);
+    }
+
+    ui->horizontalLayout_chart->addWidget(chartView);
+
+
+}

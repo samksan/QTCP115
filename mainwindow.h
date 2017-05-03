@@ -66,6 +66,10 @@ private slots:
 
     void on_pushButton_filter_clicked();
 
+    void on_chart_zdd_1_clicked();
+
+    void on_chart_zdd_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
