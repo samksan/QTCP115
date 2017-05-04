@@ -190,11 +190,9 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
             int num = DataAll::numbers_zdbd[num_now][loop5];
             for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
                 if (DataAll::numbers_zdbd[loop_ana].mid(1, 5).contains(num)) {
-                    temp[DataAll::numbers_zdbd[loop_ana][11] - 1] += 1;
-                    temp[DataAll::numbers_zdbd[loop_ana][12] - 1] += 1;
-                    temp[DataAll::numbers_zdbd[loop_ana][13] - 1] += 1;
-                    temp[DataAll::numbers_zdbd[loop_ana][14] - 1] += 1;
-                    temp[DataAll::numbers_zdbd[loop_ana][15] - 1] += 1;
+                    int pos = DataAll::numbers_zdbd[loop_ana].mid(1,5).indexOf(num);
+                    int v = DataAll::numbers_zdbd[loop_ana][10 + pos];
+                    temp[v - 1] += 1;
                 }
             }
 
@@ -226,7 +224,7 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
         }
 
 
-        // 主动单
+        // 主动整
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
             for (int loop_ana = 0; loop_ana < num_now; ++loop_ana) {
@@ -245,7 +243,7 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
             vector_temp_group << position;
         }
 
-        // 被动单
+        // 被动整
         // 目标: 被动单: 多出5个数字 pointer(76-80)
         // 循环 1-5 个号码
         for (int loop5 = 1; loop5 <= 5; ++loop5) {
@@ -274,19 +272,148 @@ void AnalysisUtils::s3_zdbd_ana(const int num_chart)
 }
 
 /**
- * @brief AnalysisUtils::s4_filter 第四步: 过滤号码
- * @param zdd 主动单的过滤条件, 1-21 的集合
- * @param zdz 主动整的过滤条件, 1-21 的集合
- * @param bdd 被动单的过滤条件, 1-21 的集合
- * @param bdz 被动整的过滤条件, 1-21 的集合
+ * @brief AnalysisUtils::s4_filter void 第四步: 过滤号码
+ * @param zdd QVector<int> 主动单的过滤条件, 1-21 的集合
+ * @param zdz QVector<int> 主动整的过滤条件, 1-21 的集合
+ * @param bdd QVector<int> 被动单的过滤条件, 1-21 的集合
+ * @param bdz QVector<int> 被动整的过滤条件, 1-21 的集合
  */
 void AnalysisUtils::s4_filter(const QVector<int> zdd, const QVector<int> zdz, const QVector<int> bdd, const QVector<int> bdz)
 {
+    // 获取 DataAll::numbers_ana 的最后一期的数据
+    QVector<int> last = DataAll::numbers_ana[DataAll::numbers_ana.length() - 1];
+//    qDebug() << "最后一期的 numbers_ana 数据是:";
+//    qDebug() << "期号: " << last[0];
+//    qDebug() << "号码: " << last.mid(1,5);
+//    qDebug() << "第1个号码的 DESC: " << last.mid(6,11);
+//    qDebug() << "第2个号码的 DESC: " << last.mid(17,11);
+//    qDebug() << "第3个号码的 DESC: " << last.mid(28,11);
+//    qDebug() << "第4个号码的 DESC: " << last.mid(39,11);
+//    qDebug() << "第5个号码的 DESC: " << last.mid(50,11);
+
+    // 过滤结果 QVector<int>
     DataAll::init_numbers_filter();
-    foreach (QVector<int> temp, DataAll::numbers_filter) {
-        qDebug() << temp;
+
+    // 循环 DataAll::numbers_filter (现在的格式是: QVector<int>(5) 长度为462)
+    for (int var = 0; var < DataAll::numbers_filter.length(); ++var) {
+        // zd
+        int temp_zdbd = AnalysisUtils::ZD_ANA(last.mid(6, 11), DataAll::numbers_filter[var][0],
+                DataAll::numbers_filter[var][1], DataAll::numbers_filter[var][2],
+                DataAll::numbers_filter[var][3], DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::ZD_ANA(last.mid(17, 11), DataAll::numbers_filter[var][0],
+                DataAll::numbers_filter[var][1], DataAll::numbers_filter[var][2],
+                DataAll::numbers_filter[var][3], DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::ZD_ANA(last.mid(28, 11), DataAll::numbers_filter[var][0],
+                DataAll::numbers_filter[var][1], DataAll::numbers_filter[var][2],
+                DataAll::numbers_filter[var][3], DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::ZD_ANA(last.mid(39, 11), DataAll::numbers_filter[var][0],
+                DataAll::numbers_filter[var][1], DataAll::numbers_filter[var][2],
+                DataAll::numbers_filter[var][3], DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::ZD_ANA(last.mid(50, 11), DataAll::numbers_filter[var][0],
+                DataAll::numbers_filter[var][1], DataAll::numbers_filter[var][2],
+                DataAll::numbers_filter[var][3], DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        // bd
+        temp_zdbd = AnalysisUtils::BD_ANA(last.mid(6, 11), last.mid(17, 11), last.mid(28, 11),
+                                          last.mid(39, 11), last.mid(50, 11), DataAll::numbers_filter[var][0]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::BD_ANA(last.mid(6, 11), last.mid(17, 11), last.mid(28, 11),
+                                          last.mid(39, 11), last.mid(50, 11), DataAll::numbers_filter[var][1]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::BD_ANA(last.mid(6, 11), last.mid(17, 11), last.mid(28, 11),
+                                          last.mid(39, 11), last.mid(50, 11), DataAll::numbers_filter[var][2]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::BD_ANA(last.mid(6, 11), last.mid(17, 11), last.mid(28, 11),
+                                          last.mid(39, 11), last.mid(50, 11), DataAll::numbers_filter[var][3]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
+        temp_zdbd = AnalysisUtils::BD_ANA(last.mid(6, 11), last.mid(17, 11), last.mid(28, 11),
+                                          last.mid(39, 11), last.mid(50, 11), DataAll::numbers_filter[var][4]);
+        DataAll::numbers_filter[var] << temp_zdbd;
+
     }
-    qDebug() << "numbers_filter 的总数为: " << DataAll::numbers_filter.length();
+
+//    qDebug() << "DataAll::numbers_filter 的全部数据:";
+//    foreach (QVector<int> temp, DataAll::numbers_filter) {
+//        qDebug() << "号码: " << temp.mid(0, 5);
+//        qDebug() << "zd : " << temp.mid(5, 5);
+//        qDebug() << "bd : " << temp.mid(10, 5);
+//    }
+
+    // DataAll::numbers_zdbd 最后一期排序
+    // DataAll::numbers_zdbd 内层 QVector 结构: QVector<int>(21)
+    // (0, 6) 期号, 第一个号码, 第二个号码, 第三个号码, 第四个号码, 第五个号码 (不包含最后一期)
+    // (6, 5) 下一期的5个号码
+    // (11, 5) 主动表
+    // (16, 5) 被动表
+
+    // 最后一期的 5 个号码
+    QVector<int> last_num = last.mid(1, 5);
+
+    // 计算 last_num 的第一个号码的主动单 DESC
+    QVector<int> last_zdd(21);
+    last_zdd.fill(0);
+    for (int var = 0; var < DataAll::numbers_zdbd.length() - 1; ++var) {
+        QVector<int> temp = DataAll::numbers_zdbd[var].mid(1,5);
+        if(temp.contains(last_num[0])){
+            int pos = temp.indexOf(last_num[0]) + 1;
+            int v = DataAll::numbers_zdbd[var][11 + pos];
+            last_zdd[v - 1] += 1;
+        }
+    }
+    VectorDesc(last_zdd);
+
+
+    // 计算 last_num 的第一个号码的主动整 DESC
+    QVector<int> last_zdz(21);
+    last_zdz.fill(0);
+    for (int var = 0; var < DataAll::numbers_zdbd.length() - 1; ++var) {
+        int v = DataAll::numbers_zdbd[var][11];
+        last_zdz[v - 1] += 1;
+        int v = DataAll::numbers_zdbd[var][12];
+        last_zdz[v - 1] += 1;
+        int v = DataAll::numbers_zdbd[var][13];
+        last_zdz[v - 1] += 1;
+        int v = DataAll::numbers_zdbd[var][14];
+        last_zdz[v - 1] += 1;
+        int v = DataAll::numbers_zdbd[var][15];
+        last_zdz[v - 1] += 1;
+    }
+    VectorDesc(last_zdz);
+
+    // 计算 last_num 的第一个号码的被动单 DESC
+    QMap<int, QVector<int>> bdd_map;
+    QVector<int> temp_vector(21);
+    for (int var11 = 1; var11 <= 11; ++var11) {
+        // 临时数组清空数据
+        temp_vector.fill(0);
+
+//        for (int var = 0; var < DataAll::numbers_zdbd.length() - 1; ++var) {
+//            QVector<int> temp = DataAll::numbers_zdbd[var].mid(1,5);
+//            if(temp.contains(last_num[0])){
+//                int pos = temp.indexOf(last_num[0]) + 1;
+//                int v = DataAll::numbers_zdbd[var][11 + pos];
+//                last_zdd[v - 1] += 1;
+//            }
+//        }
+        // DESC
+        VectorDesc(temp_vector);
+        // 保存结果集
+        bdd_map[var11] = temp_vector;
+    }
+
 }
 
 /**
