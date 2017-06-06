@@ -103,11 +103,14 @@ void NetNumbers::initQSQLDatabase()
 }
 
 /**
- * @brief NetNumbers::getHtml 通过网站过滤得到开奖号码
- * @param url 获取开奖号码的网址
+ * @brief NetNumbers::getHtmlFrom360 从 cp.360.cn 获取开奖号码
  */
-void NetNumbers::getHtml(QString url)
+void NetNumbers::getHtmlFrom360()
 {
+    // 获取号码的网络地址
+    QString url = "http://chart.cp.360.cn/zst/ln11?span=101";
+
+    // 从地址获取整个网页的数据
     QNetworkAccessManager *manager = new QNetworkAccessManager();
     QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(url)));
     QByteArray responseData;
@@ -115,17 +118,11 @@ void NetNumbers::getHtml(QString url)
     connect(manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
     eventLoop.exec();       //block until finish
     responseData = reply->readAll();
-    strToDB(responseData);
-}
+    QString str = responseData;
 
-/**
- * @brief NetNumbers::strToDB 处理从网络获取到的字符串，调用函数生成开奖号保存到数据库
- * @param str 从网络获取到的字符串
- */
-void NetNumbers::strToDB(QString str)
-{
+    // 数据整理
     QStringList list;
-    QString temp = "<td class=\"chart-bg-qh\">";
+    QString temp = "</td></tr><tr><td class='tdbg_1' >";
 
     // 分隔成101个字符串（1 - 100）包含开奖号码，0是网站的信息头
     list = str.split(temp);
@@ -140,23 +137,19 @@ void NetNumbers::strToDB(QString str)
         QStringList tempList;
 
         // 分割字符串所需的字符串
-        QString splitString = "dqhm";
-        QString splitString2 = "kjhmo";
+        QString splitString = "<strong class='num'>";
 
         // 当前期号的整体字符串
         QString stringTemp = list[var];
 
         tempList = stringTemp.split(splitString);
 
-        sn = tempList[0].mid(0,8);
-        s2 = tempList[1].mid(2,2);
-        s3 = tempList[2].mid(2,2);
-        s4 = tempList[3].mid(2,2);
-        s5 = tempList[4].mid(2,2);
-
-        tempList.clear();
-        tempList = stringTemp.split(splitString2);
-        s1 = tempList[1].mid(2,2);
+        sn = stringTemp.mid(0,8) + stringTemp.mid(9,2);
+        s1 = tempList[1].mid(0,2);
+        s2 = tempList[1].mid(3,2);
+        s3 = tempList[1].mid(6,2);
+        s4 = tempList[1].mid(9,2);
+        s5 = tempList[1].mid(12,2);
 
         result[var][0] = sn.toInt();
         result[var][1] = s1.toInt();
@@ -164,9 +157,10 @@ void NetNumbers::strToDB(QString str)
         result[var][3] = s3.toInt();
         result[var][4] = s4.toInt();
         result[var][5] = s5.toInt();
+
+        tempList.clear();
     }
     NetNumbers::toDB(result);
-
 }
 
 

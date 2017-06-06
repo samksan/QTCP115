@@ -10,11 +10,10 @@ class NetNumbers : public QObject
     Q_OBJECT
 public:
     static void initQSQLDatabase();
-    static void getHtml(QString url);
+    static void getHtmlFrom360();
     static QVector<QVector<int>> getNumbers();
 private:
     static void toDB(int number[100][6]);
-    static void strToDB(QString str);
 };
 
 #endif // NETNUMBERS_H

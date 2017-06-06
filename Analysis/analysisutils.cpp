@@ -382,13 +382,13 @@ void AnalysisUtils::s4_filter(const QVector<int> zdd, const QVector<int> zdz, co
     for (int var = 0; var < DataAll::numbers_zdbd.length() - 1; ++var) {
         int v = DataAll::numbers_zdbd[var][11];
         last_zdz[v - 1] += 1;
-        int v = DataAll::numbers_zdbd[var][12];
+        v = DataAll::numbers_zdbd[var][12];
         last_zdz[v - 1] += 1;
-        int v = DataAll::numbers_zdbd[var][13];
+        v = DataAll::numbers_zdbd[var][13];
         last_zdz[v - 1] += 1;
-        int v = DataAll::numbers_zdbd[var][14];
+        v = DataAll::numbers_zdbd[var][14];
         last_zdz[v - 1] += 1;
-        int v = DataAll::numbers_zdbd[var][15];
+        v = DataAll::numbers_zdbd[var][15];
         last_zdz[v - 1] += 1;
     }
     VectorDesc(last_zdz);

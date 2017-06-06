@@ -91,7 +91,8 @@ void MainWindow::on_btn_test_analysis_clicked()
 // 从网络获取开奖号码，并保存到数据库
 void MainWindow::on_btn_update_number_clicked()
 {
-    NetNumbers::getHtml("http://ln11x5.icaile.com/?op=dcjb&num=100");
+//    NetNumbers::getHtml("http://ln11x5.icaile.com/?op=dcjb&num=100");
+    NetNumbers::getHtmlFrom360();
     QMessageBox::information(NULL,tr("号码更新提示"),tr("号码更新成功"),QMessageBox::Ok);
 
     // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5, n6}
