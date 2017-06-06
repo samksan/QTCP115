@@ -88,23 +88,37 @@ void MainWindow::on_btn_test_analysis_clicked()
     ana.start(num_base, num_ana, num_chart);
 }
 
-// 从网络获取开奖号码，并保存到数据库
+/**
+ * @brief MainWindow::on_btn_update_number_clicked 按钮函数（更新号码）的函数
+ */
 void MainWindow::on_btn_update_number_clicked()
 {
-//    NetNumbers::getHtml("http://ln11x5.icaile.com/?op=dcjb&num=100");
+    // 从网络获取开奖号码，并保存到数据库
     NetNumbers::getHtmlFrom360();
-    QMessageBox::information(NULL,tr("号码更新提示"),tr("号码更新成功"),QMessageBox::Ok);
 
     // 号码 numbers_total => 100 * {期号, n1, n2, n3, n4, n5, n6}
     DataAll::numbers_all = NetNumbers::getNumbers();
 
-    // 判断数据库数据是否小于 100 期
-    if (DataAll::numbers_all.length() < 100) {
-        qDebug() << "期数总数错误";
-        QMessageBox::critical(NULL,
-                              tr("错误信息"),
-                              tr("号码的期数不正确,可能是数据库数据错误"));
+    // 判断数据库数据是否正确
+    foreach (QVector<int> var, DataAll::numbers_all) {
+        if (var[1] < 0 || var[1] > 11 || var[2] < 0 || var[2] > 11 || var[3] < 0 || var[3] > 11 || var[4] < 0 || var[4] > 11 | var[5] < 0 || var[5] > 11) {
+            QMessageBox::critical(NULL,
+                                  tr("错误信息"),
+                                  tr("获取开奖号码时出错，请确认网络可用，并重新获取数据"));
+            return;
+        }
     }
+
+    QStringList list;
+    int length = DataAll::numbers_all.length();
+    list << "更新号码详细信息：";
+    list << "总期数： " + QString::number(length);
+    list << "开始期数: " + QString::number(DataAll::numbers_all[0][0]);
+    list << "结束期数: " + QString::number(DataAll::numbers_all[length - 1][0]);
+
+    QString str = list.join("\n");
+    // 更新成功的提示信息
+    QMessageBox::information(NULL, tr("号码更新提示"), str, QMessageBox::Ok);
 }
 
 // 连接数据库获取号码并利用 Qt 的 Model-View 显示开奖号码

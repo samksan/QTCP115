@@ -67,9 +67,9 @@ void NetNumbers::toDB(int number[100][6])
         total++;
     }
     if(total == 100)
-        qDebug() << "数据更新成功" << endl;
+        qDebug() << "数据库写入成功，总数 100 期" << endl;
     else
-        qDebug() << "数据更新失败" << endl;
+        qDebug() << "数据库写入错误" << endl;
 
     db.close();
 }
